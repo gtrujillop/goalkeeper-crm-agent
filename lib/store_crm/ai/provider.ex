@@ -16,7 +16,9 @@ defmodule StoreCRM.AI.Provider do
   @type response :: %{
           required(:message) => String.t(),
           required(:tool_calls) => [map()],
-          required(:provider_metadata) => map()
+          required(:provider_metadata) => map(),
+          optional(:usage) => map(),
+          optional(:confidence) => number()
         }
 
   @callback respond(request()) :: {:ok, response()} | {:error, term()}

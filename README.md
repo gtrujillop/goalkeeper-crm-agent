@@ -73,10 +73,14 @@ The executable foundation is now in place:
 - liveness and database-readiness endpoints
 - provider-neutral AI boundary with a deterministic fake provider for development
 - initial automated tests and a passing `mix precommit` check
+- store-scoped customers, phone identities, conversations, and ordered messages
+- a bounded, traceable conversation engine with deterministic fake adapters
+- human escalation, duplicate suppression, and persisted outbound intents
 
-The next delivery slice is the CRM core: progressive customer profiles,
-conversations, messages, and a manager inbox. External WhatsApp, Shopify, and AI
-credentials are intentionally not required yet.
+The DEL-002 conversation core is implemented on its delivery branch. The next
+planned slices connect the Shopify catalogue and real WhatsApp messaging before
+the manager CRM workspace. External credentials are intentionally not required
+for the deterministic conversation-core tests.
 
 ## Local development
 

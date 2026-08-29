@@ -32,22 +32,22 @@ verify the engine without introducing a temporary simulator UI.
 
 ## Acceptance criteria
 
-- [ ] A seeded Colombia store profile defaults to `es-CO`, COP,
+- [x] A seeded Colombia store profile defaults to `es-CO`, COP,
       `America/Bogota`, and phone region `CO`.
-- [ ] Store-owned records and background work require an explicit store profile.
-- [ ] An inbound message creates or resolves the customer by normalized phone number.
-- [ ] Colombian local numbers normalize to E.164 while explicit international
+- [x] Store-owned records and background work require an explicit store profile.
+- [x] An inbound message creates or resolves the customer by normalized phone number.
+- [x] Colombian local numbers normalize to E.164 while explicit international
       numbers remain in their declared region.
-- [ ] Messages remain ordered, directional, and traceable to their source.
-- [ ] An agent run records its prompt, provider, model, tool calls, result, and estimated cost.
-- [ ] The engine stops at configured tool and token limits.
-- [ ] Low-confidence or disallowed requests produce a human-takeover state.
-- [ ] Duplicate inbound message identifiers are processed only once.
-- [ ] End-to-end tests cover a normal answer, tool-backed answer, duplicate message,
+- [x] Messages remain ordered, directional, and traceable to their source.
+- [x] An agent run records its prompt, provider, model, tool calls, result, and estimated cost.
+- [x] The engine stops at configured tool and token limits.
+- [x] Low-confidence or disallowed requests produce a human-takeover state.
+- [x] Duplicate inbound message identifiers are processed only once.
+- [x] End-to-end tests cover a normal answer, tool-backed answer, duplicate message,
       provider failure, bounded-loop termination, and human escalation.
-- [ ] End-to-end cases use Colombian Spanish by default and prove that store,
+- [x] End-to-end cases use Colombian Spanish by default and prove that store,
       locale, currency, and timezone context survives the full flow.
-- [ ] End-to-end tests assert persisted state and outbound intent, not private
+- [x] End-to-end tests assert persisted state and outbound intent, not private
       implementation details.
 
 ## Dependencies
@@ -68,3 +68,12 @@ The fake adapters are test infrastructure, not a user-facing simulator. They use
 the same public application boundaries that real providers will implement in
 later deliverables. This lets the tests exercise orchestration and persistence
 without network calls, paid API usage, or brittle browser automation.
+
+Implemented a store-scoped relational conversation core with deterministic phone
+identity resolution, ordered messages, agent/tool/handoff traceability, bounded
+execution, idempotent inbound ingestion, and an Oban ingestion boundary. The
+scenario suite covers normal and tool-backed answers, duplicates, provider
+failure, tool and token bounds, low confidence, disallowed actions, explicit
+international phone numbers, and suppression while a human owns a conversation.
+
+Validation: `mix precommit` passed on 2026-08-29 with 20 tests and 0 failures.

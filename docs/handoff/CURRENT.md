@@ -11,8 +11,8 @@
 
 ## Current objective
 
-Implement the store-scoped conversation core and its deterministic end-to-end
-tests. There is no terminal or LiveView simulator in scope.
+Prepare the completed store-scoped conversation core for review. There is no
+terminal or LiveView simulator in scope.
 
 ## Completed on this branch
 
@@ -21,6 +21,14 @@ tests. There is no terminal or LiveView simulator in scope.
   future Spain profile as an example.
 - Updated related product, domain, AI, and deliverable documentation.
 - Added this persistent AI-session handoff mechanism.
+- Added store profiles, progressive phone identities, conversations, explicitly
+  ordered messages, agent runs, tool calls, and human handoffs.
+- Added a bounded conversation engine with provider-neutral AI, catalogue, and
+  messaging adapters plus store-required Oban ingestion.
+- Seeded the Colombia profile and implemented E.164 normalization that preserves
+  explicit international numbers.
+- Added deterministic end-to-end coverage for all DEL-002 scenarios, token limits,
+  regional context, and automation suppression during human ownership.
 
 ## Required context
 
@@ -34,17 +42,14 @@ tests. There is no terminal or LiveView simulator in scope.
 
 ## Next actions
 
-1. Design the DEL-002 database tables and context boundaries, starting with store
-   profiles, customers, identities, conversations, and messages.
-2. Generate migrations with `mix ecto.gen.migration`; do not handcraft timestamps.
-3. Implement store-scoped ingestion and message deduplication.
-4. Add deterministic E2E scenarios through fake adapters.
-5. Continue through the remaining DEL-002 acceptance criteria, then open its PR.
+1. Review the DEL-002 implementation and commit it.
+2. Open the DEL-002 pull request and record its URL in the deliverable and board.
+3. Run the review checks and address findings before merge.
 
 ## Validation
 
-- Last full check: `mix precommit` on 2026-08-29 after adding the handoff files.
-- Result: 8 tests, 0 failures.
+- Last full check: `mix precommit` on 2026-08-29 after implementing DEL-002.
+- Result: 20 tests, 0 failures.
 
 ## Blockers and external requirements
 
@@ -55,7 +60,7 @@ tests. There is no terminal or LiveView simulator in scope.
 
 ## Repository state
 
-- The handoff changes follow commit `28399c1` (`Define configurable market store profiles`).
+- The uncommitted DEL-002 implementation follows commit `98949fb` (`Add persistent AI session handoff`).
 - The working branch tracks `origin/deliverable/DEL-002-conversation-core`.
 - Inspect Git for commits made after this handoff; Git remains authoritative for
   exact history and working-tree state.
