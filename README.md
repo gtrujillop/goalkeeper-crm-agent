@@ -33,6 +33,8 @@ The current architectural recommendation is recorded in
 
 ## Documentation map
 
+- [Current AI session handoff](docs/handoff/CURRENT.md)
+- [Durable project context](docs/handoff/PROJECT-CONTEXT.md)
 - [Delivery board](docs/deliverables/README.md)
 - [Product vision and scope](docs/product/vision-and-scope.md)
 - [Markets and store profiles](docs/product/markets-and-store-profiles.md)

@@ -14,6 +14,7 @@
 - [ ] Automated tests cover the change.
 - [ ] `mix precommit` passes.
 - [ ] Documentation and operational notes are current.
+- [ ] `docs/handoff/CURRENT.md` reflects the branch and next action.
 
 ## Deployment
 
