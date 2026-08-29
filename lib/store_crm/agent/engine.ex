@@ -6,7 +6,7 @@ defmodule StoreCRM.Agent.Engine do
 
   @prompt_version "sales-assistant-v1"
   @prompt "Ayuda al cliente en español colombiano. Usa herramientas para datos comerciales y solicita ayuda humana cuando no puedas responder con certeza."
-  @allowed_tools ~w(search_products)
+  @allowed_tools ~w(search_products create_cart)
 
   def process_inbound(store, attrs, opts \\ []) when not is_nil(store.id) do
     with {:ok, ingestion} <- Conversations.ingest(store, attrs) do
@@ -136,20 +136,25 @@ defmodule StoreCRM.Agent.Engine do
       true ->
         results = Enum.map(response.tool_calls, &execute_tool(catalogue, run, context, &1))
 
-        next_messages =
-          messages ++
-            [
-              %{role: :assistant, content: response.message},
-              %{role: :tool, content: inspect(results)}
-            ]
+        if Enum.any?(results, &match?(%{"error" => _}, &1)) do
+          {:handoff, "commerce_provider_failure", "Shopify no está disponible en este momento.",
+           stats, metadata}
+        else
+          next_messages =
+            messages ++
+              [
+                %{role: :assistant, content: response.message},
+                %{role: :tool, content: inspect(results)}
+              ]
 
-        next_stats = %{
-          stats
-          | iteration: stats.iteration + 1,
-            calls: stats.calls + length(results)
-        }
+          next_stats = %{
+            stats
+            | iteration: stats.iteration + 1,
+              calls: stats.calls + length(results)
+          }
 
-        loop(provider, catalogue, run, context, next_messages, scenario, limits, next_stats)
+          loop(provider, catalogue, run, context, next_messages, scenario, limits, next_stats)
+        end
     end
   end
 
@@ -157,13 +162,34 @@ defmodule StoreCRM.Agent.Engine do
     name = to_string(Map.fetch!(call, :name))
     arguments = Map.get(call, :arguments, %{})
     started = System.monotonic_time(:millisecond)
-    response = catalogue.execute(name, arguments, atom_context(context))
+
+    tool_context =
+      Map.merge(atom_context(context), %{
+        customer_id: run.customer_id,
+        conversation_id: run.conversation_id
+      })
+
+    response =
+      case catalogue.execute(name, arguments, tool_context) do
+        {:ok, value} when name == "create_cart" ->
+          case StoreCRM.Commerce.record_cart(tool_context, value) do
+            {:ok, _session} -> {:ok, value}
+            {:error, changeset} -> {:error, {:cart_persistence_failed, changeset.errors}}
+          end
+
+        other ->
+          other
+      end
+
     duration = System.monotonic_time(:millisecond) - started
 
     {status, result} =
       case response do
-        {:ok, value} -> {"succeeded", value}
-        {:error, reason} -> {"failed", %{"error" => inspect(reason)}}
+        {:ok, value} ->
+          {"succeeded", value}
+
+        {:error, reason} ->
+          {"failed", %{"error" => inspect(reason)}}
       end
 
     %ToolCall{store_profile_id: run.store_profile_id, agent_run_id: run.id}
@@ -295,10 +321,18 @@ defmodule StoreCRM.Agent.Engine do
       store_profile_id: context["store_profile_id"],
       locale: context["locale"],
       currency: context["currency"],
-      timezone: context["timezone"]
+      timezone: context["timezone"],
+      market: context["market"],
+      customer_id: context["customer_id"],
+      conversation_id: context["conversation_id"]
     }
 
   defp limit(store, key, default), do: Map.get(store.agent_limits || %{}, key, default)
   defp provider_name(provider), do: provider |> Module.split() |> Enum.join(".")
-  defp tool_schemas, do: [%{name: "search_products", arguments: %{type: "object"}}]
+
+  defp tool_schemas,
+    do: [
+      %{name: "search_products", arguments: %{type: "object"}},
+      %{name: "create_cart", arguments: %{type: "object"}}
+    ]
 end

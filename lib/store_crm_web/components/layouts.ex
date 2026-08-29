@@ -35,35 +35,37 @@ defmodule StoreCRMWeb.Layouts do
 
   def app(assigns) do
     ~H"""
-    <header class="navbar px-4 sm:px-6 lg:px-8">
-      <div class="flex-1">
-        <a href="/" class="flex-1 flex w-fit items-center gap-2">
-          <img src={~p"/images/logo.svg"} width="36" />
-          <span class="text-sm font-semibold">v{Application.spec(:phoenix, :vsn)}</span>
-        </a>
-      </div>
-      <div class="flex-none">
-        <ul class="flex flex-column px-1 space-x-4 items-center">
-          <li>
-            <a href="https://phoenixframework.org/" class="btn btn-ghost">Website</a>
-          </li>
-          <li>
-            <a href="https://github.com/phoenixframework/phoenix" class="btn btn-ghost">GitHub</a>
-          </li>
-          <li>
-            <.theme_toggle />
-          </li>
-          <li>
-            <a href="https://phoenix.hexdocs.pm/overview.html" class="btn btn-primary">
-              Get Started <span aria-hidden="true">&rarr;</span>
-            </a>
-          </li>
-        </ul>
+    <header class="border-b border-slate-200 bg-white/95 px-4 backdrop-blur sm:px-6 lg:px-8">
+      <div class="mx-auto flex h-18 max-w-7xl items-center justify-between gap-6">
+        <div class="min-w-0 flex-1">
+          <a href={~p"/"} class="flex w-fit items-center gap-3 text-slate-950">
+            <span class="flex size-10 items-center justify-center rounded-2xl bg-emerald-950 text-white shadow-sm">
+              <.icon name="hero-shield-check" class="size-5" />
+            </span>
+            <span>
+              <span class="block text-sm font-bold tracking-tight">Goalkeeper CRM</span>
+              <span class="block text-xs text-slate-500">Espacio comercial</span>
+            </span>
+          </a>
+        </div>
+        <div class="flex-none">
+          <ul class="flex items-center gap-2 px-1">
+            <li>
+              <.link
+                navigate={~p"/shopify"}
+                class="rounded-xl px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-950"
+              >Shopify</.link>
+            </li>
+            <li>
+              <.theme_toggle />
+            </li>
+          </ul>
+        </div>
       </div>
     </header>
 
-    <main class="px-4 py-20 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-2xl space-y-4">
+    <main class="px-4 py-10 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-6xl space-y-6">
         {render_slot(@inner_block)}
       </div>
     </main>
