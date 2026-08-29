@@ -9,7 +9,9 @@ defmodule StoreCRM.Catalogue.Fake do
              "id" => "glove-1",
              "name" => "Guante Pro Turf",
              "price" => 189_900,
-             "currency" => context.currency
+             "currency" => context.currency,
+             "available" => true,
+             "url" => "https://example.myshopify.com/products/guante-pro-turf"
            }
          ],
          "requirements" => arguments

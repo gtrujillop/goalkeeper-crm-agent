@@ -18,6 +18,7 @@ defmodule StoreCRMWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    live "/shopify", ShopifyLive
   end
 
   scope "/health", StoreCRMWeb do

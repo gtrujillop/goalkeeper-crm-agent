@@ -76,6 +76,7 @@ The executable foundation is now in place:
 - store-scoped customers, phone identities, conversations, and ordered messages
 - a bounded, traceable conversation engine with deterministic fake adapters
 - human escalation, duplicate suppression, and persisted outbound intents
+- a live Shopify catalogue and test-cart workspace at <http://localhost:4000/shopify>
 
 The DEL-002 conversation core is implemented on its delivery branch. The next
 planned slices connect the Shopify catalogue and real WhatsApp messaging before

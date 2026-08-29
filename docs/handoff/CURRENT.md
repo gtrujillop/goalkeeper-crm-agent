@@ -3,64 +3,52 @@
 | Field | Value |
 | --- | --- |
 | Updated | 2026-08-29 |
-| Active deliverable | [DEL-002: Conversation core](../deliverables/DEL-002-conversation-core.md) |
-| Status | In Progress |
-| Branch | `deliverable/DEL-002-conversation-core` |
-| Pull request | — |
+| Active deliverable | [DEL-003: Shopify catalogue and cart](../deliverables/DEL-003-shopify-catalogue-and-cart.md) |
+| Status | In Review |
+| Branch | `deliverable/DEL-003-shopify-catalogue-cart` |
+| Pull request | [#2](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/2) |
 | Production | No |
 
 ## Current objective
 
-Prepare the completed store-scoped conversation core for review. There is no
-terminal or LiveView simulator in scope.
+Review and merge the live-validated Shopify catalogue, cart integration, and
+Spanish operator workspace in pull request #2.
 
 ## Completed on this branch
 
-- Refined DEL-002 around an application-level conversation engine and E2E tests.
-- Defined configurable store profiles with Colombia as the seeded default and a
-  future Spain profile as an example.
-- Updated related product, domain, AI, and deliverable documentation.
-- Added this persistent AI-session handoff mechanism.
-- Added store profiles, progressive phone identities, conversations, explicitly
-  ordered messages, agent runs, tool calls, and human handoffs.
-- Added a bounded conversation engine with provider-neutral AI, catalogue, and
-  messaging adapters plus store-required Oban ingestion.
-- Seeded the Colombia profile and implemented E.164 normalization that preserves
-  explicit international numbers.
-- Added deterministic end-to-end coverage for all DEL-002 scenarios, token limits,
-  regional context, and automation suppression during human ownership.
+- Added store-scoped Shopify domain and API-version configuration with the private token loaded from the environment.
+- Added a Req-based Shopify Storefront GraphQL adapter for product search and cart creation.
+- Normalized product links, variant availability, exact currency, and locale-aware display prices.
+- Persisted Shopify cart checkout links as commerce sessions correlated with store, customer, and conversation.
+- Added safe commerce-provider escalation and deterministic fixture contract/integration coverage.
+- Added a responsive `/shopify` LiveView and homepage entry point for live catalogue search, variant availability, correlated test-cart creation, and checkout access.
 
 ## Required context
 
-- [DEL-002](../deliverables/DEL-002-conversation-core.md)
-- [Project context](PROJECT-CONTEXT.md)
-- [Markets and store profiles](../product/markets-and-store-profiles.md)
-- [Domain model](../domain/domain-model.md)
-- [System architecture](../architecture/system-architecture.md)
-- [AI agent design](../ai/agent-design.md)
-- [AI traceability and evaluations](../ai/traceability-and-evaluations.md)
+- [DEL-003](../deliverables/DEL-003-shopify-catalogue-and-cart.md)
 
 ## Next actions
 
-1. Review the DEL-002 implementation and commit it.
-2. Open the DEL-002 pull request and record its URL in the deliverable and board.
-3. Run the review checks and address findings before merge.
+1. Monitor pull request #2 checks and review feedback.
+2. Address any findings on the DEL-003 branch and rerun `mix precommit`.
+3. After approval, merge the PR and set DEL-003 to `Done` on `main`; production remains `No` until separately deployed and verified.
 
 ## Validation
 
-- Last full check: `mix precommit` on 2026-08-29 after implementing DEL-002.
-- Result: 20 tests, 0 failures.
+- `mix precommit` passed on 2026-08-29 against the current changes: 26 tests, 0 failures.
+- Live private-token authentication and a read-only catalogue search succeeded on 2026-08-29, returning ten products without logging credentials or product details.
+- Live cart creation succeeded on 2026-08-29 for `DEL003 Test Gloves`: Shopify returned a COP checkout URL and commerce-session correlation was persisted. No checkout, order, or payment was submitted.
+- Focused LiveView and homepage tests passed on 2026-08-29: 3 tests, 0 failures.
+- Local `/shopify` HTTP smoke check returned 200 after recreating the development app container.
+- User visually and functionally accepted the final Spanish Shopify workspace on 2026-08-29.
 
 ## Blockers and external requirements
 
 - No current implementation blocker.
-- Real OpenAI API, Shopify, and WhatsApp credentials are not required for DEL-002.
-- ChatGPT Plus supports AI-assisted development but production OpenAI API usage
-  will require separate API billing in a later deliverable.
 
 ## Repository state
 
-- The uncommitted DEL-002 implementation follows commit `98949fb` (`Add persistent AI session handoff`).
-- The working branch tracks `origin/deliverable/DEL-002-conversation-core`.
-- Inspect Git for commits made after this handoff; Git remains authoritative for
-  exact history and working-tree state.
+- Branch `deliverable/DEL-003-shopify-catalogue-cart` was created from merged DEL-002 commit `87aee61` on `main`.
+- Implementation commit `17eccb9` (`Implement DEL-003 Shopify catalogue and cart`) is pushed to origin.
+- Pull request #2 is open at https://github.com/gtrujillop/goalkeeper-crm-agent/pull/2.
+- Inspect Git for exact working-tree state and commits after this handoff.

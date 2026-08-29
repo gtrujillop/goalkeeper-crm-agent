@@ -26,6 +26,9 @@ defmodule StoreCRM.AI.FakeProvider do
       :tool ->
         tool_response(iteration)
 
+      :cart ->
+        cart_response(iteration)
+
       :loop ->
         ok("", [%{name: "search_products", arguments: %{surface: "sintética"}}], 1.0, iteration)
 
@@ -45,6 +48,25 @@ defmodule StoreCRM.AI.FakeProvider do
 
   defp tool_response(iteration),
     do: ok("Te recomiendo el Guante Pro Turf por $189.900 COP.", [], 0.99, iteration)
+
+  defp cart_response(1),
+    do:
+      ok(
+        "",
+        [
+          %{
+            name: "create_cart",
+            arguments: %{
+              "lines" => [%{"merchandiseId" => "gid://shopify/ProductVariant/1", "quantity" => 1}]
+            }
+          }
+        ],
+        1.0,
+        1
+      )
+
+  defp cart_response(iteration),
+    do: ok("Aquí tienes tu enlace de pago seguro.", [], 0.99, iteration)
 
   defp ok(message, calls, confidence, iteration, usage \\ %{input_tokens: 40, output_tokens: 20}) do
     {:ok,

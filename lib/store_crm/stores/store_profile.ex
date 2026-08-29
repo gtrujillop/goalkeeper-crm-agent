@@ -14,6 +14,8 @@ defmodule StoreCRM.Stores.StoreProfile do
     field :phone_region, :string
     field :enabled_locales, {:array, :string}, default: []
     field :agent_limits, :map, default: %{}
+    field :shopify_shop_domain, :string
+    field :shopify_api_version, :string
     timestamps(type: :utc_datetime)
   end
 
@@ -28,7 +30,9 @@ defmodule StoreCRM.Stores.StoreProfile do
       :timezone,
       :phone_region,
       :enabled_locales,
-      :agent_limits
+      :agent_limits,
+      :shopify_shop_domain,
+      :shopify_api_version
     ])
     |> validate_required([
       :slug,
