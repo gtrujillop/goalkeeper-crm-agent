@@ -1,0 +1,15 @@
+FROM elixir:1.18.4-otp-27-slim
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends build-essential ca-certificates git inotify-tools \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV MIX_HOME=/opt/mix \
+    HEX_HOME=/opt/hex \
+    PATH=/opt/mix/escripts:${PATH}
+
+RUN mix local.hex --force && mix local.rebar --force
+
+WORKDIR /app
+
+CMD ["mix", "phx.server"]
