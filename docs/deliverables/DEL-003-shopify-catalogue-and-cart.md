@@ -3,9 +3,9 @@
 | Field | Value |
 | --- | --- |
 | Created | 2026-08-29 |
-| Status | In Progress |
+| Status | In Review |
 | Branch | `deliverable/DEL-003-shopify-catalogue-cart` |
-| Pull request | — |
+| Pull request | [#2](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/2) |
 | Production | No |
 | Production date | — |
 

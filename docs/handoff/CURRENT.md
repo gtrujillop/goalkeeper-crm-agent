@@ -4,15 +4,15 @@
 | --- | --- |
 | Updated | 2026-08-29 |
 | Active deliverable | [DEL-003: Shopify catalogue and cart](../deliverables/DEL-003-shopify-catalogue-and-cart.md) |
-| Status | In Progress |
+| Status | In Review |
 | Branch | `deliverable/DEL-003-shopify-catalogue-cart` |
-| Pull request | — |
+| Pull request | [#2](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/2) |
 | Production | No |
 
 ## Current objective
 
-Prepare the live-validated Shopify catalogue, cart integration, and Spanish
-operator workspace for pull-request review.
+Review and merge the live-validated Shopify catalogue, cart integration, and
+Spanish operator workspace in pull request #2.
 
 ## Completed on this branch
 
@@ -29,9 +29,9 @@ operator workspace for pull-request review.
 
 ## Next actions
 
-1. Commit and push the completed DEL-003 implementation.
-2. Open the DEL-003 pull request and record its URL in the deliverable and board.
-3. Run review checks and address findings before merge.
+1. Monitor pull request #2 checks and review feedback.
+2. Address any findings on the DEL-003 branch and rerun `mix precommit`.
+3. After approval, merge the PR and set DEL-003 to `Done` on `main`; production remains `No` until separately deployed and verified.
 
 ## Validation
 
@@ -49,4 +49,6 @@ operator workspace for pull-request review.
 ## Repository state
 
 - Branch `deliverable/DEL-003-shopify-catalogue-cart` was created from merged DEL-002 commit `87aee61` on `main`.
+- Implementation commit `17eccb9` (`Implement DEL-003 Shopify catalogue and cart`) is pushed to origin.
+- Pull request #2 is open at https://github.com/gtrujillop/goalkeeper-crm-agent/pull/2.
 - Inspect Git for exact working-tree state and commits after this handoff.
