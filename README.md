@@ -33,6 +33,7 @@ The current architectural recommendation is recorded in
 
 ## Documentation map
 
+- [Delivery board](docs/deliverables/README.md)
 - [Product vision and scope](docs/product/vision-and-scope.md)
 - [Customer journeys](docs/product/customer-journeys.md)
 - [Operator experience and cost guardrails](docs/product/operator-experience-and-cost.md)
