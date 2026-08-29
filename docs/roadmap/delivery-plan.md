@@ -9,17 +9,19 @@
 - Confirm consent and privacy requirements.
 - Establish success metrics and an evaluation baseline.
 
-## Phase 1: Local conversation simulator
+## Phase 1: Conversation core
 
-Deliver a terminal or LiveView simulator using a fake WhatsApp adapter and fake
-catalogue.
+Deliver the conversation engine and exercise it through deterministic end-to-end
+tests using fake provider adapters. No temporary simulator UI is required.
 
 - Phoenix application and Ecto foundation
 - Customer, conversation, message, and agent-run schemas
 - AI provider behaviour and fake provider
+- Fake WhatsApp and catalogue adapters
 - Bounded tool loop
 - Prompt versioning
 - Behavioral evaluation harness
+- End-to-end conversation scenarios covering persistence and outbound intent
 
 ## Phase 2: Shopify vertical slice
 
