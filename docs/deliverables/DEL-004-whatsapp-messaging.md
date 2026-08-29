@@ -22,6 +22,7 @@ a store manager can immediately take control of any conversation.
 - Outbound messages, templates, delivery statuses, and retry policy.
 - Explicit automation pause and human takeover.
 - WhatsApp sandbox or test-number operation.
+- Store-scoped WhatsApp account mapping and locale-specific templates.
 
 ## Acceptance criteria
 

@@ -17,6 +17,7 @@ Shopify checkout path without duplicating Shopify administration.
 ## Scope
 
 - Shopify authentication and provider adapter.
+- Store-scoped Shopify configuration and explicit price currency.
 - Product and variant search with current price and availability.
 - Product detail links and cart creation.
 - Commerce-session correlation with customer and conversation.
@@ -27,6 +28,7 @@ Shopify checkout path without duplicating Shopify administration.
 - [ ] Product claims presented by the agent originate from Shopify results.
 - [ ] Unavailable variants are not recommended as purchasable.
 - [ ] A cart link is associated with its conversation and customer.
+- [ ] Product prices retain Shopify's currency and use the active profile's locale for display.
 - [ ] Shopify failures degrade safely and can trigger human takeover.
 - [ ] Contract and integration tests run against fixtures or a test store.
 

@@ -16,6 +16,15 @@ help customers select products and sizes, create a path to checkout, identify
 when a human is needed, and support relevant long-term relationships after a
 purchase.
 
+## Initial market and expansion
+
+The initial store profile serves Colombia with `es-CO`, COP, an
+`America/Bogota` business timezone, and Colombian payment and logistics context.
+Those values are configurable profile defaults rather than global constants. A
+future Spain operation would use a separate store profile, provider accounts,
+policies, and data context while sharing the application code. See
+[Markets and store profiles](markets-and-store-profiles.md).
+
 ## Primary users
 
 ### Customer

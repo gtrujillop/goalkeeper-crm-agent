@@ -1,4 +1,71 @@
-This is a web application written using the Phoenix web framework.
+# Goalkeeper CRM Agent instructions
+
+This is an AI-assisted conversational CRM for a Shopify goalkeeper-equipment
+store. It is a Phoenix web application, initially serving the Colombian market.
+
+## Required session startup
+
+Before planning or changing the project, every AI coding session must:
+
+1. Read [README.md](README.md).
+2. Read [docs/handoff/CURRENT.md](docs/handoff/CURRENT.md) for the active branch,
+   completed work, validation state, blockers, and next actions.
+3. Read [docs/deliverables/README.md](docs/deliverables/README.md), then read the
+   complete active `DEL-*.md` file named by the handoff.
+4. Read only the product, architecture, integration, operations, and ADR documents
+   linked under `Required context` in the active deliverable or handoff.
+5. Inspect `git status`, the current branch, and recent commits before editing.
+6. Treat repository documents and code as authoritative over remembered chat
+   context. If they conflict, stop and identify the conflict before proceeding.
+
+Do not require the user to repeat established business context. The durable
+context is summarized in [docs/handoff/PROJECT-CONTEXT.md](docs/handoff/PROJECT-CONTEXT.md),
+with deeper decisions in the linked documentation.
+
+## Required session handoff
+
+Before ending a session that materially changes code, scope, status, or decisions:
+
+1. Update the active deliverable's acceptance criteria, status, PR, production
+   fields, and delivery notes when applicable.
+2. Update the delivery-board row in `docs/deliverables/README.md` whenever its
+   metadata changes.
+3. Update `docs/handoff/CURRENT.md` with facts only: current branch, commits,
+   completed work, checks run, blockers, and concrete next actions.
+4. Keep durable product decisions out of `CURRENT.md`; place them in the relevant
+   product, architecture, integration, operations, or ADR document and link it.
+5. Run `mix precommit` and record the result. Never claim a check passed unless it
+   was executed against the current changes.
+
+`CURRENT.md` is deliberately small and replaceable. It is a pointer to current
+state, not an append-only diary and not a substitute for Git history.
+
+## Product invariants
+
+- Shopify remains the commerce system of record; do not rebuild its administration.
+- The CRM owns relationships, conversations, traceability, attribution evidence,
+  follow-up, and human takeover.
+- The initial seeded store profile is Colombia (`CO`, `es-CO`, COP,
+  `America/Bogota`, phone region `CO`), but market behavior is configurable.
+- A future market such as Spain is a separate store profile sharing the codebase,
+  not a long-lived Git branch.
+- Store-owned records, jobs, policies, integrations, and AI runs must carry an
+  explicit store-profile context.
+- The model may choose proposed actions; deterministic application code validates,
+  authorizes, executes, and records them.
+- External side effects must be idempotent and traceable. Human takeover must be
+  immediate and must suppress automated replies.
+- Optimize for a small store: prefer a modular monolith, managed services, fake
+  adapters in tests, and explicit cost controls over premature infrastructure.
+
+## Delivery workflow
+
+- Each feature belongs to one `docs/deliverables/DEL-*.md` epic.
+- Feature branches use `deliverable/DEL-###-short-name` and point to exactly one
+  active deliverable.
+- Pull requests link the deliverable and update its PR field.
+- `Done` means merged acceptance criteria; production deployment is tracked
+  separately.
 
 ## Project guidelines
 

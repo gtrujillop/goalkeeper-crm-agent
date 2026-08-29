@@ -24,7 +24,7 @@ the separate `Production` field.
 | ID | Deliverable | Status | Branch | PR | Production |
 | --- | --- | --- | --- | --- | --- |
 | [DEL-001](DEL-001-application-foundation.md) | Application foundation | Done | `main` | Bootstrap commit | No |
-| [DEL-002](DEL-002-conversation-core-and-simulator.md) | Conversation core and simulator | Selected | `deliverable/DEL-002-conversation-core` | — | No |
+| [DEL-002](DEL-002-conversation-core.md) | Conversation core | In Progress | `deliverable/DEL-002-conversation-core` | — | No |
 | [DEL-003](DEL-003-shopify-catalogue-and-cart.md) | Shopify catalogue and cart | Backlog | `deliverable/DEL-003-shopify-catalogue-cart` | — | No |
 | [DEL-004](DEL-004-whatsapp-messaging.md) | WhatsApp messaging | Backlog | `deliverable/DEL-004-whatsapp-messaging` | — | No |
 | [DEL-005](DEL-005-manager-crm-workspace.md) | Manager CRM workspace | Backlog | `deliverable/DEL-005-manager-crm` | — | No |
