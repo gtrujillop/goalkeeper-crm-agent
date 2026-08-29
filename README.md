@@ -35,6 +35,7 @@ The current architectural recommendation is recorded in
 
 - [Delivery board](docs/deliverables/README.md)
 - [Product vision and scope](docs/product/vision-and-scope.md)
+- [Markets and store profiles](docs/product/markets-and-store-profiles.md)
 - [Customer journeys](docs/product/customer-journeys.md)
 - [Operator experience and cost guardrails](docs/product/operator-experience-and-cost.md)
 - [System architecture](docs/architecture/system-architecture.md)

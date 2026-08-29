@@ -9,6 +9,18 @@ choices, helps create a cart, and requests human help when necessary.
 It is not the source of truth for CRM state, price, inventory, orders, payment,
 consent, or authorization.
 
+## Store and market context
+
+Every agent run receives an explicit store profile, market, locale, currency,
+timezone, and applicable policy versions. The Colombia profile defaults to
+natural Colombian Spanish. A different profile, such as Spain, supplies its own
+regional terminology and policies without changing the conversation engine.
+
+The model may use another language supported by the active profile when the
+customer requests it. Translation must not change prices, currencies, payment
+methods, delivery coverage, or policy meaning. Evaluations include representative
+language and commercial vocabulary for every activated market.
+
 ## Provider boundary
 
 Define an application behaviour with normalized request and response types:

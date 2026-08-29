@@ -19,6 +19,8 @@ acquisition evidence when it exists without inventing attribution.
 - Shopify paid, cancelled, fulfilled, and refunded order events.
 - Customer and conversation correlation using defensible identity evidence.
 - Opportunity conversion and payment-path recording.
+- Store-scoped Colombian payment and fulfillment context, initially including
+  bank transfer, Mercado Pago, and TCC cash on delivery.
 - Instagram referral metadata and Google redirect tokens.
 - First-touch and last-touch attribution reporting with confidence/source.
 - Direct Shopify purchases with no preceding conversation as a first-class path.

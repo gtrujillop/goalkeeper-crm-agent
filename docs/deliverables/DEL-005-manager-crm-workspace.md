@@ -22,6 +22,7 @@ exceptions, and advance sales from one mobile-friendly workspace.
 - Opportunity pipeline, notes, and follow-up tasks.
 - AI enable/disable, assignment, and takeover actions.
 - Concise Shopify order cards linking to Shopify order details.
+- Active-store context and locale-aware currency, date, and time presentation.
 
 ## Acceptance criteria
 

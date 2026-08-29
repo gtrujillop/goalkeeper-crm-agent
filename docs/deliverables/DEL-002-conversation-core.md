@@ -17,18 +17,27 @@ verify the engine without introducing a temporary simulator UI.
 
 ## Scope
 
+- Store profiles as the root context for customers, conversations, policies, and
+  provider configuration, with a seeded Colombia default.
 - Progressive customer identity beginning with a normalized phone number.
 - Conversations, inbound and outbound messages, and lifecycle states.
 - Agent-run, prompt-version, tool-call, and cost-estimate traceability.
 - A bounded conversation engine behind provider-neutral adapter behaviours.
 - Fake WhatsApp, catalogue, and AI adapters for deterministic automated tests.
+- Explicit locale, currency, timezone, and phone-region context throughout a
+  conversation and agent run.
 - End-to-end conversation scenarios that exercise the application from inbound
   message ingestion through persisted outbound response.
 - Baseline behavioral evaluations and human-escalation behavior.
 
 ## Acceptance criteria
 
+- [ ] A seeded Colombia store profile defaults to `es-CO`, COP,
+      `America/Bogota`, and phone region `CO`.
+- [ ] Store-owned records and background work require an explicit store profile.
 - [ ] An inbound message creates or resolves the customer by normalized phone number.
+- [ ] Colombian local numbers normalize to E.164 while explicit international
+      numbers remain in their declared region.
 - [ ] Messages remain ordered, directional, and traceable to their source.
 - [ ] An agent run records its prompt, provider, model, tool calls, result, and estimated cost.
 - [ ] The engine stops at configured tool and token limits.
@@ -36,6 +45,8 @@ verify the engine without introducing a temporary simulator UI.
 - [ ] Duplicate inbound message identifiers are processed only once.
 - [ ] End-to-end tests cover a normal answer, tool-backed answer, duplicate message,
       provider failure, bounded-loop termination, and human escalation.
+- [ ] End-to-end cases use Colombian Spanish by default and prove that store,
+      locale, currency, and timezone context survives the full flow.
 - [ ] End-to-end tests assert persisted state and outbound intent, not private
       implementation details.
 
@@ -46,6 +57,7 @@ verify the engine without introducing a temporary simulator UI.
 ## Out of scope
 
 - A terminal or LiveView conversation simulator.
+- Activating a second market or building store-profile administration screens.
 - Real WhatsApp delivery.
 - Real Shopify catalogue and cart operations.
 - Full manager CRM navigation and opportunity pipeline.

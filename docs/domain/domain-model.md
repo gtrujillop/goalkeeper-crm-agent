@@ -3,22 +3,34 @@
 ## Aggregate overview
 
 ```text
-Customer
-├── Identities
-├── Facts
-├── Consents
-├── Conversations
-│   ├── Messages
-│   ├── Agent runs
-│   └── Handoffs
-├── Touchpoints
-├── Opportunities
-├── Commerce sessions
-└── Orders
-    ├── Order items
-    ├── Payments
-    └── Shipments
+Store profile
+└── Customer
+    ├── Identities
+    ├── Facts
+    ├── Consents
+    ├── Conversations
+    │   ├── Messages
+    │   ├── Agent runs
+    │   └── Handoffs
+    ├── Touchpoints
+    ├── Opportunities
+    ├── Commerce sessions
+    └── Orders
+        ├── Order items
+        ├── Payments
+        └── Shipments
 ```
+
+## Store profile
+
+`store_profiles` is the root business context. It owns market, enabled locales,
+default currency, business timezone, phone parsing region, policy versions, and
+references to provider configurations. The initial profile is Colombia; another
+operation such as Spain is a separate profile using the same application.
+
+All customer, conversation, commerce, prompt, policy, and integration records
+carry a store-profile identifier. Uniqueness constraints and queries are scoped
+accordingly so records cannot leak between stores.
 
 ## Customer and identity
 
@@ -28,6 +40,10 @@ email without using any of those values as the primary key.
 
 Important fields include lifecycle stage, preferred language when known, first
 and last interaction, order count, last purchase date, and lifetime value.
+
+Customer language and country may differ from the store defaults. Phone numbers
+use E.164 normalization; the active profile's region is used only to interpret a
+local-format number without an explicit international prefix.
 
 A customer is valid with only a WhatsApp identity or only a Shopify identity.
 Early WhatsApp records typically contain a normalized phone number, provider
