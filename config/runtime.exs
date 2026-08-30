@@ -23,6 +23,17 @@ end
 config :store_crm, StoreCRMWeb.Endpoint,
   http: [port: String.to_integer(System.get_env("PORT", "4000"))]
 
+config :store_crm, :whatsapp,
+  adapter:
+    if(System.get_env("WHATSAPP_ACCESS_TOKEN") in [nil, ""],
+      do: StoreCRM.Messaging.Fake,
+      else: StoreCRM.Messaging.WhatsApp
+    ),
+  verify_token: System.get_env("WHATSAPP_VERIFY_TOKEN"),
+  app_secret: System.get_env("WHATSAPP_APP_SECRET"),
+  access_token: System.get_env("WHATSAPP_ACCESS_TOKEN"),
+  graph_api_version: System.get_env("WHATSAPP_GRAPH_API_VERSION", "v26.0")
+
 if config_env() == :dev do
   # Reload browser tabs when matching files change.
   config :store_crm, StoreCRMWeb.Endpoint,
