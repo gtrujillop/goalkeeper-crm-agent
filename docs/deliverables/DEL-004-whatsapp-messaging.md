@@ -3,8 +3,8 @@
 | Field | Value |
 | --- | --- |
 | Created | 2026-08-29 |
-| Status | In Review |
-| Branch | `deliverable/DEL-004-whatsapp-messaging` |
+| Status | Done |
+| Branch | `main` |
 | Pull request | [#3](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/3) |
 | Production | No |
 | Production date | — |
@@ -51,9 +51,12 @@ Implemented on `deliverable/DEL-004-whatsapp-messaging` with store-scoped accoun
 mapping, raw signed webhook persistence, idempotent Oban processing, PostgreSQL
 advisory-lock serialization per customer, Cloud API text and locale-template
 delivery, delivery-event audit records, transient retries, and an atomic manager
-takeover operation. The agent
-rechecks ownership immediately before emitting a reply to close the in-flight
-takeover race.
+takeover operation. The agent rechecks ownership immediately before emitting a
+reply to close the in-flight takeover race.
+
+Merged to `main` in pull request [#3](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/3)
+as merge commit `bb35d8e` on 2026-08-29. Production remains `No`; only Meta's
+Cloud API test number was used for live validation.
 
 Local validation on 2026-08-29: `mix precommit` passed with 33 tests and 0
 failures. Live Meta test-number validation succeeded on 2026-08-29 using the
