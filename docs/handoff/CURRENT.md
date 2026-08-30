@@ -4,9 +4,9 @@
 | --- | --- |
 | Updated | 2026-08-29 |
 | Active deliverable | [DEL-004: WhatsApp messaging](../deliverables/DEL-004-whatsapp-messaging.md) |
-| Status | In Progress |
+| Status | In Review |
 | Branch | `deliverable/DEL-004-whatsapp-messaging` |
-| Pull request | — |
+| Pull request | [#3](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/3) |
 | Production | No |
 
 ## Current objective
@@ -31,8 +31,8 @@ then open its pull request.
 
 ## Next actions
 
-1. Review the completed DEL-004 implementation and live Meta test-number evidence.
-2. Open a pull request and move DEL-004 to `In Review`.
+1. Review pull request #3 and its live Meta test-number evidence.
+2. Merge DEL-004 after review, then update its status to `Done` on `main`.
 3. Keep the live store number on the WhatsApp Business app until a production-ready manager inbox or approved Coexistence provider is selected.
 
 ## Validation
@@ -55,5 +55,5 @@ then open its pull request.
 ## Repository state
 
 - Current branch is `deliverable/DEL-004-whatsapp-messaging`; inspect Git for the exact commit.
-- DEL-004 acceptance behavior is implemented and validated locally and against Meta's Cloud API test number; a pull request remains.
+- DEL-004 acceptance behavior is implemented and validated locally and against Meta's Cloud API test number; pull request #3 is open.
 - Inspect Git for exact commits after this handoff; Git remains authoritative.
