@@ -28,6 +28,12 @@ defmodule StoreCRMWeb.Router do
     get "/ready", HealthController, :ready
   end
 
+  scope "/webhooks", StoreCRMWeb do
+    pipe_through :api
+    get "/whatsapp", WhatsAppWebhookController, :verify
+    post "/whatsapp", WhatsAppWebhookController, :receive
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", StoreCRMWeb do
   #   pipe_through :api

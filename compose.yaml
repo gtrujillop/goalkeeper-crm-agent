@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    command: sh -lc "START_OBAN=false mix setup && exec mix phx.server"
+    command: sh -lc "START_OBAN=true mix setup && exec mix phx.server"
     environment:
       DATABASE_HOST: postgres
       DATABASE_USER: postgres
@@ -13,6 +13,10 @@ services:
       SHOPIFY_SHOP_DOMAIN: ${SHOPIFY_SHOP_DOMAIN:-}
       SHOPIFY_STOREFRONT_PRIVATE_TOKEN: ${SHOPIFY_STOREFRONT_PRIVATE_TOKEN:-}
       SHOPIFY_STOREFRONT_API_VERSION: ${SHOPIFY_STOREFRONT_API_VERSION:-2026-07}
+      WHATSAPP_VERIFY_TOKEN: ${WHATSAPP_VERIFY_TOKEN:-}
+      WHATSAPP_APP_SECRET: ${WHATSAPP_APP_SECRET:-}
+      WHATSAPP_ACCESS_TOKEN: ${WHATSAPP_ACCESS_TOKEN:-}
+      WHATSAPP_GRAPH_API_VERSION: ${WHATSAPP_GRAPH_API_VERSION:-v26.0}
     ports:
       - "4000:4000"
     volumes:

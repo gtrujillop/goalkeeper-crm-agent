@@ -206,6 +206,23 @@ defmodule StoreCRM.Agent.Engine do
   end
 
   defp finish(store, ingestion, run, response, stats, metadata, messaging) do
+    conversation = Repo.get!(Conversation, ingestion.conversation.id)
+
+    if conversation.state in ["waiting_for_human", "human_owned"] do
+      run = update_run(run, "suppressed", nil, nil, stats, metadata, "human_takeover")
+
+      {:ok,
+       Map.merge(ingestion, %{
+         conversation: conversation,
+         agent_run: run,
+         automation_suppressed?: true
+       })}
+    else
+      persist_and_deliver(store, ingestion, run, response, stats, metadata, messaging)
+    end
+  end
+
+  defp persist_and_deliver(store, ingestion, run, response, stats, metadata, messaging) do
     now = DateTime.utc_now() |> DateTime.truncate(:second)
 
     output =
@@ -239,8 +256,45 @@ defmodule StoreCRM.Agent.Engine do
   end
 
   defp handoff(store, ingestion, run, reason, summary, stats, metadata, messaging) do
+    conversation = Repo.get!(Conversation, ingestion.conversation.id)
+
+    if conversation.state == "human_owned" do
+      run = update_run(run, "suppressed", nil, nil, stats, metadata, "human_takeover")
+
+      {:ok,
+       Map.merge(ingestion, %{
+         conversation: conversation,
+         agent_run: run,
+         automation_suppressed?: true
+       })}
+    else
+      persist_handoff(
+        store,
+        ingestion,
+        run,
+        reason,
+        summary,
+        stats,
+        metadata,
+        messaging,
+        conversation
+      )
+    end
+  end
+
+  defp persist_handoff(
+         store,
+         ingestion,
+         run,
+         reason,
+         summary,
+         stats,
+         metadata,
+         messaging,
+         conversation
+       ) do
     conversation =
-      ingestion.conversation
+      conversation
       |> Conversation.changeset(%{state: "waiting_for_human"})
       |> Repo.update!()
 

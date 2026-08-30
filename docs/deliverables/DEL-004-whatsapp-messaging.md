@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Created | 2026-08-29 |
-| Status | Backlog |
+| Status | In Progress |
 | Branch | `deliverable/DEL-004-whatsapp-messaging` |
 | Pull request | — |
 | Production | No |
@@ -26,12 +26,12 @@ a store manager can immediately take control of any conversation.
 
 ## Acceptance criteria
 
-- [ ] Duplicate webhook deliveries never create duplicate customer messages.
-- [ ] Accepted inbound events are persisted before asynchronous processing.
-- [ ] Messages within one conversation are processed in order.
-- [ ] Outbound status transitions are visible and auditable.
-- [ ] Human takeover prevents further automated replies immediately.
-- [ ] Invalid signatures and unsupported payloads are rejected safely.
+- [x] Duplicate webhook deliveries never create duplicate customer messages.
+- [x] Accepted inbound events are persisted before asynchronous processing.
+- [x] Messages within one conversation are processed in order.
+- [x] Outbound status transitions are visible and auditable.
+- [x] Human takeover prevents further automated replies immediately.
+- [x] Invalid signatures and unsupported payloads are rejected safely.
 
 ## Dependencies
 
@@ -46,3 +46,18 @@ a store manager can immediately take control of any conversation.
 
 The direct Meta Cloud API remains the preferred low-cost starting integration,
 subject to account and operational validation.
+
+Implemented on `deliverable/DEL-004-whatsapp-messaging` with store-scoped account
+mapping, raw signed webhook persistence, idempotent Oban processing, PostgreSQL
+advisory-lock serialization per customer, Cloud API text and locale-template
+delivery, delivery-event audit records, transient retries, and an atomic manager
+takeover operation. The agent
+rechecks ownership immediately before emitting a reply to close the in-flight
+takeover race.
+
+Local validation on 2026-08-29: `mix precommit` passed with 33 tests and 0
+failures. Live Meta test-number validation succeeded on 2026-08-29 using the
+Cloud API test number: a signed inbound text was persisted and processed, the
+agent response was sent, and `sent`, `delivered`, and `read` transitions were
+persisted. The live store number remains on the WhatsApp Business app and is
+preserved as an inactive CRM mapping.
