@@ -18,6 +18,8 @@ defmodule StoreCRMWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    live "/crm", CRMLive
+    live "/crm/conversations/:id", CRMLive
     live "/shopify", ShopifyLive
   end
 

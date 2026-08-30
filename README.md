@@ -77,11 +77,11 @@ The executable foundation is now in place:
 - a bounded, traceable conversation engine with deterministic fake adapters
 - human escalation, duplicate suppression, and persisted outbound intents
 - a live Shopify catalogue and test-cart workspace at <http://localhost:4000/shopify>
+- a mobile-friendly manager CRM workspace at <http://localhost:4000/crm>
 
-The DEL-002 conversation core is implemented on its delivery branch. The next
-planned slices connect the Shopify catalogue and real WhatsApp messaging before
-the manager CRM workspace. External credentials are intentionally not required
-for the deterministic conversation-core tests.
+DEL-005 is in progress on its delivery branch with the manager CRM workspace
+implemented and covered by deterministic tests. Live Shopify and WhatsApp
+credentials remain local and are not required by the automated quality gate.
 
 ## Local development
 

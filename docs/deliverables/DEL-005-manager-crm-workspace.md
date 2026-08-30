@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Created | 2026-08-29 |
-| Status | Backlog |
+| Status | In Progress |
 | Branch | `deliverable/DEL-005-manager-crm` |
 | Pull request | — |
 | Production | No |
@@ -26,12 +26,12 @@ exceptions, and advance sales from one mobile-friendly workspace.
 
 ## Acceptance criteria
 
-- [ ] A manager can find a customer by phone or known profile information.
-- [ ] The timeline clearly distinguishes customer, agent, system, and manager activity.
-- [ ] Conversations needing attention are prioritized with a reason.
-- [ ] A manager can pause automation and reply without leaving the conversation.
-- [ ] Shopify order details open in Shopify rather than being reimplemented.
-- [ ] Primary workflows are usable on a phone-sized viewport.
+- [x] A manager can find a customer by phone or known profile information.
+- [x] The timeline clearly distinguishes customer, agent, system, and manager activity.
+- [x] Conversations needing attention are prioritized with a reason.
+- [x] A manager can pause automation and reply without leaving the conversation.
+- [x] Shopify order details open in Shopify rather than being reimplemented.
+- [x] Primary workflows are usable on a phone-sized viewport.
 
 ## Dependencies
 
@@ -47,3 +47,11 @@ exceptions, and advance sales from one mobile-friendly workspace.
 ## Delivery notes
 
 Optimize for exceptions and next actions rather than exposing every stored field.
+
+- Added `/crm` with an exception-ranked, searchable conversation inbox and responsive detail workspace.
+- Added confirmed customer profile facts, manager assignment, automation controls, direct WhatsApp replies, notes, follow-up tasks, and opportunity stages.
+- Added concise order-summary records that link to Shopify Admin; Shopify remains the commerce system of record.
+- All records and actions are explicitly scoped to the active store profile, with store-local date/time and currency presentation.
+- Automated LiveView coverage exercises search, selection, assignment, takeover, reply, profile confirmation, notes, tasks, opportunities, and external order links.
+- Added store-scoped PubSub refreshes after inbound webhook processing and delivery-status changes so open inboxes and timelines update without a browser reload.
+- Final local validation: `mix precommit` passed on 2026-08-29 with 37 tests and 0 failures.

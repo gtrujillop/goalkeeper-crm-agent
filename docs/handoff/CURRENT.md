@@ -4,19 +4,23 @@
 | --- | --- |
 | Updated | 2026-08-29 |
 | Active deliverable | [DEL-005: Manager CRM workspace](../deliverables/DEL-005-manager-crm-workspace.md) |
-| Status | Backlog |
-| Branch | `main` |
+| Status | In Progress |
+| Branch | `deliverable/DEL-005-manager-crm` |
 | Pull request | — |
 | Production | No |
 
 ## Current objective
 
-Select and begin DEL-005 so the manager can inspect WhatsApp conversations,
-prioritize exceptions, take over automation, and reply from a mobile-friendly
-CRM workspace before any production-number migration is considered.
+Review and prepare the implemented DEL-005 manager CRM workspace for commit and
+pull request without migrating the production WhatsApp number.
 
 ## Recently completed
 
+- Implemented `/crm` with a responsive, exception-ranked conversation inbox and customer search by name, email, or normalized phone.
+- Added ordered role-aware message history, manager assignment, immediate AI pause/resume, and direct replies through the configured messaging adapter.
+- Added progressive confirmed profiles, notes, follow-up tasks, opportunity stages, and Shopify order summary links.
+- Added store-scoped CRM persistence and locale-aware store/currency/time presentation.
+- Added real-time store-scoped CRM refreshes after inbound WhatsApp processing and delivery-status updates.
 - DEL-004 merged to `main` in pull request [#3](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/3) as merge commit `bb35d8e`.
 - Added signed Meta webhook verification, durable idempotent event ingestion, and per-customer job serialization.
 - Added Cloud API text/template delivery, transient retries, and auditable `sent`, `delivered`, `read`, and failed statuses.
@@ -29,13 +33,14 @@ CRM workspace before any production-number migration is considered.
 
 ## Next actions
 
-1. Review DEL-005 scope and select it by setting its status to `In Progress`.
-2. Create `deliverable/DEL-005-manager-crm` from up-to-date `main`.
-3. Implement the exception-driven conversation inbox and ordered message timeline first.
+1. Review the DEL-005 implementation and the `/crm` workspace on phone and desktop viewports.
+2. Commit the completed implementation and open a pull request linked to DEL-005.
+3. Perform a live reply check with Meta's test number before considering the deliverable ready for review.
 
 ## Validation
 
-- DEL-004 final `mix precommit` passed on 2026-08-29: 33 tests, 0 failures.
+- DEL-005 `mix precommit` passed on 2026-08-29: 37 tests, 0 failures.
+- CRM LiveView tests cover customer search, priority selection, Shopify links, assignment, takeover, manager reply, confirmed profiles, notes, tasks, and opportunities.
 - Live Meta test-number validation persisted inbound `Hola!!`, sent the deterministic agent reply, and recorded `sent`, `delivered`, and `read`.
 - Duplicate delivery, signature rejection, unsupported payload, status auditing, serialization, and takeover suppression have automated coverage.
 - The real store number was not migrated and remains on the WhatsApp Business mobile app.
@@ -48,6 +53,6 @@ CRM workspace before any production-number migration is considered.
 
 ## Repository state
 
-- Current branch is `main` at merge commit `bb35d8e` before this handoff-finalization commit.
-- DEL-004 is `Done`; production remains `No` because only Meta's test number was used.
+- Current branch is `deliverable/DEL-005-manager-crm`, based on `main` at `e881a90`.
+- DEL-005 acceptance criteria are implemented; status remains `In Progress` until review and merge.
 - Inspect Git for exact commits after this handoff; Git remains authoritative.

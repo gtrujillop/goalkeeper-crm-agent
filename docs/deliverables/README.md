@@ -27,7 +27,7 @@ the separate `Production` field.
 | [DEL-002](DEL-002-conversation-core.md) | Conversation core | In Progress | `deliverable/DEL-002-conversation-core` | — | No |
 | [DEL-003](DEL-003-shopify-catalogue-and-cart.md) | Shopify catalogue and cart | Done | `deliverable/DEL-003-shopify-catalogue-cart` | [#2](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/2) | No |
 | [DEL-004](DEL-004-whatsapp-messaging.md) | WhatsApp messaging | Done | `main` | [#3](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/3) | No |
-| [DEL-005](DEL-005-manager-crm-workspace.md) | Manager CRM workspace | Backlog | `deliverable/DEL-005-manager-crm` | — | No |
+| [DEL-005](DEL-005-manager-crm-workspace.md) | Manager CRM workspace | In Progress | `deliverable/DEL-005-manager-crm` | — | No |
 | [DEL-006](DEL-006-orders-and-attribution.md) | Orders and attribution | Backlog | `deliverable/DEL-006-orders-attribution` | — | No |
 | [DEL-007](DEL-007-controlled-production-pilot.md) | Controlled production pilot | Backlog | `deliverable/DEL-007-production-pilot` | — | No |
 | [DEL-008](DEL-008-retention-workflows.md) | Retention workflows | Backlog | `deliverable/DEL-008-retention-workflows` | — | No |

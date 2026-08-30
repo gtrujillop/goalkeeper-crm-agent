@@ -52,6 +52,12 @@ defmodule StoreCRMWeb.Layouts do
           <ul class="flex items-center gap-2 px-1">
             <li>
               <.link
+                navigate={~p"/crm"}
+                class="rounded-xl px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-950"
+              >CRM</.link>
+            </li>
+            <li>
+              <.link
                 navigate={~p"/shopify"}
                 class="rounded-xl px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-950"
               >Shopify</.link>

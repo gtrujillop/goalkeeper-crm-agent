@@ -46,7 +46,18 @@ defmodule StoreCRM.Messaging do
         messaging_adapter: adapter
       )
 
-    complete_event(event, result)
+    case complete_event(event, result) do
+      :ok ->
+        if match?({:ok, _}, result) do
+          {:ok, processed} = result
+          StoreCRM.Conversations.notify_changed(store.id, processed.conversation.id)
+        end
+
+        :ok
+
+      error ->
+        error
+    end
   end
 
   def process_event(%WebhookEvent{kind: "status"} = event) do
@@ -71,7 +82,17 @@ defmodule StoreCRM.Messaging do
         {:ok, :ignored_unknown_outbound_message}
       end
 
-    complete_event(event, result)
+    case complete_event(event, result) do
+      :ok ->
+        if message,
+          do:
+            StoreCRM.Conversations.notify_changed(event.store_profile_id, message.conversation_id)
+
+        :ok
+
+      error ->
+        error
+    end
   end
 
   def take_over(store, conversation_id) do
