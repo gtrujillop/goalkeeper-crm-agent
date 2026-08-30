@@ -11,8 +11,8 @@
 
 ## Current objective
 
-Review and prepare the implemented DEL-005 manager CRM workspace for commit and
-pull request without migrating the production WhatsApp number.
+Open and review the DEL-005 pull request, then validate one manager reply with
+Meta's test number without migrating the production WhatsApp number.
 
 ## Recently completed
 
@@ -21,6 +21,7 @@ pull request without migrating the production WhatsApp number.
 - Added progressive confirmed profiles, notes, follow-up tasks, opportunity stages, and Shopify order summary links.
 - Added store-scoped CRM persistence and locale-aware store/currency/time presentation.
 - Added real-time store-scoped CRM refreshes after inbound WhatsApp processing and delivery-status updates.
+- Committed the implementation as `d49f92b` and pushed `deliverable/DEL-005-manager-crm` to origin.
 - DEL-004 merged to `main` in pull request [#3](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/3) as merge commit `bb35d8e`.
 - Added signed Meta webhook verification, durable idempotent event ingestion, and per-customer job serialization.
 - Added Cloud API text/template delivery, transient retries, and auditable `sent`, `delivered`, `read`, and failed statuses.
@@ -33,9 +34,9 @@ pull request without migrating the production WhatsApp number.
 
 ## Next actions
 
-1. Review the DEL-005 implementation and the `/crm` workspace on phone and desktop viewports.
-2. Commit the completed implementation and open a pull request linked to DEL-005.
-3. Perform a live reply check with Meta's test number before considering the deliverable ready for review.
+1. Open a pull request linked to DEL-005 and set the deliverable to `In Review` with the PR URL.
+2. Review the `/crm` workspace on phone and desktop viewports.
+3. Perform a live manager-reply check with Meta's test number before merge.
 
 ## Validation
 
@@ -53,6 +54,6 @@ pull request without migrating the production WhatsApp number.
 
 ## Repository state
 
-- Current branch is `deliverable/DEL-005-manager-crm`, based on `main` at `e881a90`.
+- Current branch is `deliverable/DEL-005-manager-crm` at implementation commit `d49f92b`, tracking `origin/deliverable/DEL-005-manager-crm`.
 - DEL-005 acceptance criteria are implemented; status remains `In Progress` until review and merge.
 - Inspect Git for exact commits after this handoff; Git remains authoritative.
