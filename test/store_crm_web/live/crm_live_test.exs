@@ -72,6 +72,10 @@ defmodule StoreCRMWeb.CRMLiveTest do
     |> render_submit()
 
     assert has_element?(view, "#message-timeline article", "Hola Laura")
+
+    view |> element("#back-to-inbox") |> render_click()
+    assert_patch(view, ~p"/crm")
+    assert has_element?(view, "#conversation-empty")
   end
 
   test "manager confirms profile and records next actions", %{
@@ -96,6 +100,25 @@ defmodule StoreCRMWeb.CRMLiveTest do
     assert has_element?(view, "#notes p", "Prefiere talla 9")
     assert has_element?(view, "#tasks button", "Confirmar guía")
     assert Repo.aggregate(StoreCRM.CRM.Opportunity, :count) == 1
+  end
+
+  test "a manual reply automatically pauses AI to prevent competing responses", %{
+    conn: conn,
+    conversation: conversation
+  } do
+    {:ok, view, _html} = live(conn, ~p"/crm/conversations/#{conversation.id}")
+
+    assert has_element?(view, "#takeover-button[aria-pressed='false']")
+    assert has_element?(view, "#intervention-banner")
+
+    view
+    |> form("#manager-reply-form", reply: %{content: "Yo continúo con este caso."})
+    |> render_submit()
+
+    conversation = Repo.get!(Conversation, conversation.id)
+    assert conversation.automation_enabled == false
+    assert conversation.state == "human_owned"
+    assert has_element?(view, "#resume-button[aria-pressed='true']")
   end
 
   test "search is store scoped and supports normalized phone", %{conn: conn} do

@@ -20,6 +20,7 @@ defmodule StoreCRMWeb.Router do
     get "/", PageController, :home
     live "/crm", CRMLive
     live "/crm/conversations/:id", CRMLive
+    live "/admin", AdminLive
     live "/shopify", ShopifyLive
   end
 

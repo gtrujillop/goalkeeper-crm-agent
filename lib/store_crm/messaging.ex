@@ -4,10 +4,31 @@ defmodule StoreCRM.Messaging do
   alias StoreCRM.Conversations.{Conversation, Message}
   alias StoreCRM.Messaging.{DeliveryEvent, WebhookEvent, WhatsAppAccount, ProcessWebhookWorker}
 
+  def list_accounts(store) do
+    from(a in WhatsAppAccount,
+      where: a.store_profile_id == ^store.id,
+      order_by: [desc: a.active, desc: a.updated_at]
+    )
+    |> Repo.all()
+  end
+
+  def get_account!(store, id),
+    do: Repo.get_by!(WhatsAppAccount, id: id, store_profile_id: store.id)
+
+  def change_account(%WhatsAppAccount{} = account, attrs \\ %{}),
+    do: WhatsAppAccount.changeset(account, attrs)
+
   def create_account(store, attrs) do
     %WhatsAppAccount{store_profile_id: store.id}
     |> WhatsAppAccount.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def update_account(store, id, attrs) do
+    store
+    |> get_account!(id)
+    |> WhatsAppAccount.changeset(attrs)
+    |> Repo.update()
   end
 
   def accept_webhook(payload) do
