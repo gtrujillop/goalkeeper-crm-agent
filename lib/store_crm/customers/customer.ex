@@ -5,6 +5,9 @@ defmodule StoreCRM.Customers.Customer do
   @foreign_key_type :binary_id
 
   schema "customers" do
+    field :name, :string
+    field :email, :string
+    field :profile_confidence, :string, default: "unconfirmed"
     field :preferred_locale, :string
     field :first_interaction_at, :utc_datetime
     field :last_interaction_at, :utc_datetime
@@ -15,6 +18,14 @@ defmodule StoreCRM.Customers.Customer do
   def changeset(customer, attrs),
     do:
       customer
-      |> cast(attrs, [:preferred_locale, :first_interaction_at, :last_interaction_at])
+      |> cast(attrs, [
+        :name,
+        :email,
+        :profile_confidence,
+        :preferred_locale,
+        :first_interaction_at,
+        :last_interaction_at
+      ])
       |> validate_required([:first_interaction_at, :last_interaction_at])
+      |> validate_inclusion(:profile_confidence, ~w(unconfirmed inferred confirmed))
 end

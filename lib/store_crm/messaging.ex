@@ -4,10 +4,31 @@ defmodule StoreCRM.Messaging do
   alias StoreCRM.Conversations.{Conversation, Message}
   alias StoreCRM.Messaging.{DeliveryEvent, WebhookEvent, WhatsAppAccount, ProcessWebhookWorker}
 
+  def list_accounts(store) do
+    from(a in WhatsAppAccount,
+      where: a.store_profile_id == ^store.id,
+      order_by: [desc: a.active, desc: a.updated_at]
+    )
+    |> Repo.all()
+  end
+
+  def get_account!(store, id),
+    do: Repo.get_by!(WhatsAppAccount, id: id, store_profile_id: store.id)
+
+  def change_account(%WhatsAppAccount{} = account, attrs \\ %{}),
+    do: WhatsAppAccount.changeset(account, attrs)
+
   def create_account(store, attrs) do
     %WhatsAppAccount{store_profile_id: store.id}
     |> WhatsAppAccount.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def update_account(store, id, attrs) do
+    store
+    |> get_account!(id)
+    |> WhatsAppAccount.changeset(attrs)
+    |> Repo.update()
   end
 
   def accept_webhook(payload) do
@@ -46,7 +67,18 @@ defmodule StoreCRM.Messaging do
         messaging_adapter: adapter
       )
 
-    complete_event(event, result)
+    case complete_event(event, result) do
+      :ok ->
+        if match?({:ok, _}, result) do
+          {:ok, processed} = result
+          StoreCRM.Conversations.notify_changed(store.id, processed.conversation.id)
+        end
+
+        :ok
+
+      error ->
+        error
+    end
   end
 
   def process_event(%WebhookEvent{kind: "status"} = event) do
@@ -71,7 +103,17 @@ defmodule StoreCRM.Messaging do
         {:ok, :ignored_unknown_outbound_message}
       end
 
-    complete_event(event, result)
+    case complete_event(event, result) do
+      :ok ->
+        if message,
+          do:
+            StoreCRM.Conversations.notify_changed(event.store_profile_id, message.conversation_id)
+
+        :ok
+
+      error ->
+        error
+    end
   end
 
   def take_over(store, conversation_id) do

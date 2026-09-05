@@ -8,6 +8,8 @@ defmodule StoreCRM.Conversations.Conversation do
   schema "conversations" do
     field :state, :string, default: "active"
     field :locale, :string
+    field :assigned_to, :string
+    field :automation_enabled, :boolean, default: true
     belongs_to :store_profile, StoreCRM.Stores.StoreProfile
     belongs_to :customer, StoreCRM.Customers.Customer
     timestamps(type: :utc_datetime)
@@ -16,7 +18,7 @@ defmodule StoreCRM.Conversations.Conversation do
   def changeset(conversation, attrs),
     do:
       conversation
-      |> cast(attrs, [:state, :locale])
+      |> cast(attrs, [:state, :locale, :assigned_to, :automation_enabled])
       |> validate_required([:state, :locale])
       |> validate_inclusion(:state, @states)
 end

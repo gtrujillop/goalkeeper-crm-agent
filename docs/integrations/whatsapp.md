@@ -2,8 +2,18 @@
 
 ## Boundary
 
-Use the official WhatsApp Business Platform/Cloud API or an approved provider.
-Do not automate WhatsApp Web.
+Use the official WhatsApp Business Platform/Cloud API directly. Do not automate
+WhatsApp Web.
+
+The initial production strategy does not use WhatsApp Business App
+Coexistence. Once the store number is registered with Cloud API, managers send
+manual replies from the Goalkeeper CRM inbox rather than the WhatsApp Business
+mobile app. Human takeover changes conversation ownership and suppresses AI; it
+does not change the delivery channel, so manager replies still travel through
+Cloud API.
+
+Coexistence and third-party BSP inboxes remain possible future alternatives,
+but are not dependencies for initial production delivery.
 
 The adapter owns provider-specific authentication, payloads, status mapping,
 media retrieval, and error handling. The conversation domain receives normalized
@@ -61,7 +71,7 @@ decisions and the template version used.
 
 ## Open questions
 
-- Direct Cloud API versus an approved provider with a shared inbox
-- Existing-number migration or coexistence support
+- Timing and rollback plan for migrating the existing store number from the
+  WhatsApp Business app to direct Cloud API
 - Media retention duration
 - Supported languages for the first production release

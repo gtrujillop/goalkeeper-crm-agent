@@ -6,6 +6,12 @@ defmodule StoreCRM.Stores do
   def get_profile_by_slug!(slug), do: Repo.get_by!(StoreProfile, slug: slug)
   def create_profile(attrs), do: %StoreProfile{} |> StoreProfile.changeset(attrs) |> Repo.insert()
 
+  def update_profile(%StoreProfile{} = profile, attrs),
+    do: profile |> StoreProfile.changeset(attrs) |> Repo.update()
+
+  def change_profile(%StoreProfile{} = profile, attrs \\ %{}),
+    do: StoreProfile.changeset(profile, attrs)
+
   def colombia_attrs do
     %{
       slug: "colombia",

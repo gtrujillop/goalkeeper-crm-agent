@@ -5,6 +5,17 @@ defmodule StoreCRM.Conversations do
   alias StoreCRM.Customers.{Customer, Identity, Phone}
   alias StoreCRM.Conversations.{Conversation, Message}
 
+  def subscribe(store_profile_id),
+    do: Phoenix.PubSub.subscribe(StoreCRM.PubSub, topic(store_profile_id))
+
+  def notify_changed(store_profile_id, conversation_id),
+    do:
+      Phoenix.PubSub.broadcast(
+        StoreCRM.PubSub,
+        topic(store_profile_id),
+        {:conversation_changed, conversation_id}
+      )
+
   def ingest(store_profile, attrs) when not is_nil(store_profile.id) do
     with {:ok, phone} <- Phone.normalize(attrs.phone, store_profile.phone_region) do
       case Repo.get_by(Message,
@@ -133,4 +144,6 @@ defmodule StoreCRM.Conversations do
          select: max(m.position)
      ) || 0) + 1
   end
+
+  defp topic(store_profile_id), do: "crm:store:#{store_profile_id}"
 end
