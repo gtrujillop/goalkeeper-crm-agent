@@ -4,16 +4,16 @@
 | --- | --- |
 | Updated | 2026-09-05 |
 | Active deliverable | [DEL-005: Manager CRM workspace](../deliverables/DEL-005-manager-crm-workspace.md) |
-| Status | In Progress |
+| Status | In Review |
 | Branch | `deliverable/DEL-005-manager-crm` |
-| Pull request | — |
+| Pull request | [#4](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/4) |
 | Production | No |
 
 ## Current objective
 
-Open and review the DEL-005 pull request, then validate one manager reply from
-Goalkeeper with Meta's test number without migrating the production WhatsApp
-number.
+Review [DEL-005 pull request #4](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/4),
+then validate one manager reply from Goalkeeper with Meta's test number without
+migrating the production WhatsApp number.
 
 ## Recently completed
 
@@ -27,6 +27,7 @@ number.
 - Manager replies now pause AI automatically before delivery to prevent competing responses.
 - Added `/admin` to manage store-scoped WABA mappings and activation, inspect masked credential readiness, and edit core store settings without using the console.
 - Committed the conversation UX, responsive behavior, direct Cloud API operating model, and administration interface as `4dc044f`.
+- Opened DEL-005 pull request [#4](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/4) and moved the deliverable to `In Review`.
 - Committed the implementation as `d49f92b` and pushed `deliverable/DEL-005-manager-crm` to origin.
 - DEL-004 merged to `main` in pull request [#3](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/3) as merge commit `bb35d8e`.
 - Added signed Meta webhook verification, durable idempotent event ingestion, and per-customer job serialization.
@@ -40,7 +41,7 @@ number.
 
 ## Next actions
 
-1. Open a pull request linked to DEL-005 and set the deliverable to `In Review` with the PR URL.
+1. Review pull request #4.
 2. Review `/crm` and `/admin` on physical phone and tablet browsers.
 3. Perform a live manager-reply check with Meta's test number before merge.
 4. Implement [DEL-009](../deliverables/DEL-009-operator-access-and-authorization.md) before production exposure of `/crm` or `/admin`.
@@ -64,5 +65,5 @@ number.
 ## Repository state
 
 - Current branch is `deliverable/DEL-005-manager-crm` at implementation commit `4dc044f`, tracking `origin/deliverable/DEL-005-manager-crm`.
-- DEL-005 acceptance criteria are implemented; status remains `In Progress` until review and merge.
+- DEL-005 acceptance criteria are implemented; pull request #4 is in review and must be validated before merge.
 - Inspect Git for exact commits after this handoff; Git remains authoritative.

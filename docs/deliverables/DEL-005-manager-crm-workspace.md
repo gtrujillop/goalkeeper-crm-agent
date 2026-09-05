@@ -3,9 +3,9 @@
 | Field | Value |
 | --- | --- |
 | Created | 2026-08-29 |
-| Status | In Progress |
+| Status | In Review |
 | Branch | `deliverable/DEL-005-manager-crm` |
-| Pull request | — |
+| Pull request | [#4](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/4) |
 | Production | No |
 | Production date | — |
 
