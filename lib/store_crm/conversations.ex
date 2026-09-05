@@ -70,6 +70,10 @@ defmodule StoreCRM.Conversations do
       })
       |> repo.insert()
     end)
+    |> Multi.run(:attribution, fn _repo, result ->
+      :ok = StoreCRM.Attribution.capture(store, result)
+      {:ok, :captured}
+    end)
     |> Repo.transaction()
     |> case do
       {:ok, result} -> {:ok, Map.put(result, :duplicate?, false)}

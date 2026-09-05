@@ -43,7 +43,7 @@ Shopify checkout path without duplicating Shopify administration.
 
 ## Delivery notes
 
-Use Shopify as the commerce system of record and link operators to authoritative
+Use Shopify as the commerce system of record for its sales channel and link operators to authoritative
 Shopify screens wherever detailed commerce work is required.
 
 Implemented a store-scoped Shopify Storefront GraphQL adapter, normalized product

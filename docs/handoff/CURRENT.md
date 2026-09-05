@@ -3,67 +3,83 @@
 | Field | Value |
 | --- | --- |
 | Updated | 2026-09-05 |
-| Active deliverable | [DEL-005: Manager CRM workspace](../deliverables/DEL-005-manager-crm-workspace.md) |
-| Status | In Review |
-| Branch | `deliverable/DEL-005-manager-crm` |
-| Pull request | [#4](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/4) |
+| Active deliverable | [DEL-006: Orders and attribution](../deliverables/DEL-006-orders-and-attribution.md) |
+| Status | In Progress |
+| Branch | `deliverable/DEL-006-orders-attribution` |
+| Pull request | — |
 | Production | No |
 
 ## Current objective
 
-Review [DEL-005 pull request #4](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/4),
-then validate one manager reply from Goalkeeper with Meta's test number without
-migrating the production WhatsApp number.
+Review the WhatsApp-first DEL-006 workflow and prepare its pull request.
 
-## Recently completed
+## Completed
 
-- Implemented `/crm` with a responsive, exception-ranked conversation inbox and customer search by name, email, or normalized phone.
-- Added ordered role-aware message history, manager assignment, immediate AI pause/resume, and direct replies through the configured messaging adapter.
-- Added progressive confirmed profiles, notes, follow-up tasks, opportunity stages, and Shopify order summary links.
-- Added store-scoped CRM persistence and locale-aware store/currency/time presentation.
-- Added real-time store-scoped CRM refreshes after inbound WhatsApp processing and delivery-status updates.
-- Selected direct Meta Cloud API without Coexistence for the initial production operating model; managers will perform manual takeover and replies in Goalkeeper.
-- Redesigned `/crm` for direct WhatsApp operations with prominent AI/human ownership, escalation handling, denser conversation navigation, and a safer reply composer.
-- Manager replies now pause AI automatically before delivery to prevent competing responses.
-- Added `/admin` to manage store-scoped WABA mappings and activation, inspect masked credential readiness, and edit core store settings without using the console.
-- Committed the conversation UX, responsive behavior, direct Cloud API operating model, and administration interface as `4dc044f`.
-- Opened DEL-005 pull request [#4](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/4) and moved the deliverable to `In Review`.
-- Committed the implementation as `d49f92b` and pushed `deliverable/DEL-005-manager-crm` to origin.
-- DEL-004 merged to `main` in pull request [#3](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/3) as merge commit `bb35d8e`.
-- Added signed Meta webhook verification, durable idempotent event ingestion, and per-customer job serialization.
-- Added Cloud API text/template delivery, transient retries, and auditable `sent`, `delivered`, `read`, and failed statuses.
-- Added immediate human takeover with an ownership recheck before outbound automation.
-- Validated a real inbound and outbound exchange using Meta's Cloud API test number.
+- Branched from updated `main` at `076c618` (DEL-005 PR #4 merge).
+- Reconciled DEL-005 status to Done after the user's merge confirmation.
+- Implemented signed Shopify webhook ingestion, atomic event/job persistence,
+  idempotent lifecycle projections, conservative identity matching, signed cart
+  correlation, and reliable paid-opportunity conversion.
+- Added `/crm/orders` for direct purchases, identity reconciliation, event history,
+  payment/fulfillment context, evidence-backed first/last attribution, and internal
+  delivery follow-up tasks.
+- Added Meta referral capture, Google redirect tokens, and derived customer totals.
+- Added Admin setup and monitoring for DEL-006: domain, campaign WhatsApp number,
+  payment mappings, masked signing-secret status, setup instructions, campaign
+  link, reception/error counts, attribution counts, and recent store-scoped events.
+- Added native WhatsApp order entry from conversations with agreed item and
+  delivery snapshots, server-computed totals, transfer/COD methods, and explicit
+  opportunity linkage, independently of Shopify.
+- Added auditable independent payment/fulfillment transitions, submission
+  deduplication, store scoping and stale-screen rejection. Both channels appear
+  in order lists, customer context, attribution and follow-up.
+- Admin now shows native orders and pending transfer/COD counts above the optional
+  Shopify integration setup.
+- Updated durable product boundaries in AGENTS.md and linked product/domain docs
+  following the owner's confirmation that WhatsApp sales remain outside Shopify.
+- Applied `20260905170604_add_orders_and_attribution` and
+  `20260905173634_add_native_whatsapp_orders` to the local development DB.
 
 ## Required context
 
-- [DEL-005](../deliverables/DEL-005-manager-crm-workspace.md)
-
-## Next actions
-
-1. Review pull request #4.
-2. Review `/crm` and `/admin` on physical phone and tablet browsers.
-3. Perform a live manager-reply check with Meta's test number before merge.
-4. Implement [DEL-009](../deliverables/DEL-009-operator-access-and-authorization.md) before production exposure of `/crm` or `/admin`.
+- [DEL-006](../deliverables/DEL-006-orders-and-attribution.md), including its Required context links.
 
 ## Validation
 
-- DEL-005 `mix precommit` passed on 2026-09-05: 40 tests, 0 failures.
-- CRM LiveView tests cover customer search, priority selection, Shopify links, assignment, takeover, manager reply, confirmed profiles, notes, tasks, and opportunities.
-- Responsive browser checks completed at 390px phone, 820px portrait tablet, and 1440px desktop widths for `/crm`; `/admin` was also checked at phone and desktop widths.
-- Live Meta test-number validation persisted inbound `Hola!!`, sent the deterministic agent reply, and recorded `sent`, `delivered`, and `read`.
-- Duplicate delivery, signature rejection, unsupported payload, status auditing, serialization, and takeover suppression have automated coverage.
-- The real store number was not migrated and remains on the WhatsApp Business mobile app.
+- `docker compose exec -e MIX_ENV=test app mix precommit`: 65 tests, 0 failures.
+- Tests cover signature verification, job persistence, duplicates, lifecycle order,
+  refunds, paid opportunity conversion, identity conflicts, store isolation,
+  unknown revenue, token expiry/replay, redirect routing, and LiveView follow-up.
 
-## Blockers and external requirements
+- Local `/crm/orders` returned HTTP 200; inspected its empty-state layout in
+  headless Chrome at 390px phone and 1440px desktop widths. Populated-order actions have LiveView coverage.
 
-- No current repository blocker.
-- Meta credentials remain local and must not be committed.
-- [DEL-009](../deliverables/DEL-009-operator-access-and-authorization.md) must protect `/crm` and `/admin` and replace hardcoded manager identity before production deployment.
-- Keep the live store number outside CRM automation until the DEL-005 manager inbox is production-ready and the direct Cloud API migration and rollback procedure is approved.
+- Admin setup/monitoring tests cover validation, persistence, clearing, store
+  isolation, refresh, and secret masking. Phone and desktop browser layouts checked.
+- The user configured the Shopify webhook secret in local `.env`; the app was
+  recreated and the running container confirms it is present without revealing it.
+- Public ngrok health returned HTTP 200 after startup.
+- Shopify Admin orders/paid test received on 2026-09-05 at 23:18:51 UTC: ngrok
+  recorded HTTP 200 and the store-scoped event is processed with no error. This
+  validates signed sample delivery; a real checkout correlation check remains pending.
+- The campaign WhatsApp destination was previously unset and was not changed.
+
+- Native order tests cover totals, snapshots, duplicate creation, opportunity
+  conversion, independent COD payment/delivery, refunds, invalid transitions,
+  store isolation and stale forms. Native entry inspected at 390px and 1440px.
+
+## Next actions / external requirements
+
+1. Review conversation → Registrar pedido → payment/delivery → attribution,
+   then open the DEL-006 PR.
+2. For the optional Shopify channel, configure its signing secret/subscriptions
+   and validate checkout correlation/webhook delivery before enabling that channel.
+   Native WhatsApp orders do not require this setup.
+3. DEL-009 must protect native order creation/detail routes, `/crm/orders`, `/crm`,
+   and `/admin` and replace the development Manager actor label before production.
 
 ## Repository state
 
-- Current branch is `deliverable/DEL-005-manager-crm` at implementation commit `4dc044f`, tracking `origin/deliverable/DEL-005-manager-crm`.
-- DEL-005 acceptance criteria are implemented; pull request #4 is in review and must be validated before merge.
-- Inspect Git for exact commits after this handoff; Git remains authoritative.
+- Branch is `deliverable/DEL-006-orders-attribution`; base commit is `076c618`.
+- DEL-006 implementation and documentation are uncommitted. No DEL-006 PR exists.
+- No production deployment or live commerce/message side effects performed.

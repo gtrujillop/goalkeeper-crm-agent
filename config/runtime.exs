@@ -23,6 +23,8 @@ end
 config :store_crm, StoreCRMWeb.Endpoint,
   http: [port: String.to_integer(System.get_env("PORT", "4000"))]
 
+config :store_crm, :shopify_webhook_secret, System.get_env("SHOPIFY_WEBHOOK_SECRET")
+
 config :store_crm, :whatsapp,
   adapter:
     if(System.get_env("WHATSAPP_ACCESS_TOKEN") in [nil, ""],

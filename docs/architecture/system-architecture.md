@@ -26,7 +26,9 @@ Agent orchestrator ----> Application tools
           v
 WhatsApp outbound
 
-Shopify webhooks --> Orders --> Opportunities --> Retention workflows
+WhatsApp manager actions --> Native orders --+
+                                            |
+Shopify webhooks ---------> Shopify orders --+--> Opportunities --> Follow-up
 ```
 
 ## Proposed application boundaries

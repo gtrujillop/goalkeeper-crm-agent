@@ -5,6 +5,8 @@ defmodule StoreCRM.Commerce.CommerceSession do
   @foreign_key_type :binary_id
 
   schema "commerce_sessions" do
+    field :correlation_token, :string
+    belongs_to :opportunity, StoreCRM.CRM.Opportunity
     field :provider, :string
     field :external_cart_id, :string
     field :checkout_url, :string

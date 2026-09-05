@@ -55,9 +55,9 @@ awaiting_payment
 ```
 
 Initially, a human verifies proof of payment. The model must never infer that an
-image proves settlement. After verification, represent the sale in Shopify when
-that is the chosen operational process so inventory and commerce reporting remain
-consistent.
+image proves settlement. Record the agreed purchase and the verified receipt
+in the CRM. These sales remain outside Shopify; there is no automatic Shopify
+order or inventory write.
 
 ### Shopify and Mercado Pago
 
@@ -90,7 +90,8 @@ pending_customer_confirmation
 -> payment_collected
 ```
 
-Delivery and payment collection are separate facts. A delivery may fail, be
+The order is registered from its WhatsApp conversation and managed in the CRM;
+it does not require a Shopify record. Delivery and payment collection are separate facts. A delivery may fail, be
 rescheduled, or return to the store.
 
 ## Direct Shopify journey
@@ -138,6 +139,7 @@ unrelated conversation is insufficient.
 
 ```text
 assisted_sale: true | false
-order_channel: shopify | bank_transfer | cash_on_delivery
+order_channel: whatsapp | shopify
+payment_method: bank_transfer | cash_on_delivery | shopify_gateway
 acquisition_source: known source | unknown
 ```

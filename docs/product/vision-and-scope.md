@@ -4,15 +4,17 @@
 
 Potential customers may arrive through advertisements, organic search, direct
 store visits, referrals, or unknown sources. Some ask repetitive questions
-through WhatsApp before purchasing; others buy directly from Shopify without a
-conversation. Manually managing relationship context and follow-up is
+through WhatsApp and complete their purchase there by bank transfer or cash on
+delivery. These are the majority of sales and remain entirely outside Shopify.
+Others buy directly through Shopify as an additional sales channel. Manually managing relationship context and follow-up is
 time-consuming, difficult to trace, and makes assisted sales hard to understand.
 
 ## Vision
 
 Create a trustworthy digital sales assistant that gives each customer useful,
 personal attention while maintaining a unified CRM history. The platform should
-help customers select products and sizes, create a path to checkout, identify
+help customers select products and sizes, agree a WhatsApp purchase or use Shopify
+checkout, identify
 when a human is needed, and support relevant long-term relationships after a
 purchase.
 
@@ -44,14 +46,17 @@ diagnostic view.
 
 ## System ownership
 
-Shopify remains authoritative for products, variants, inventory, prices,
-discounts, checkout, customers created during checkout, orders, payments,
-refunds, and fulfillment records.
+Shopify remains authoritative for its catalogue, checkout, and the orders,
+payments, refunds and fulfillment records belonging to its sales channel.
+The CRM owns native WhatsApp orders, agreed product/price snapshots, delivery
+details, payment evidence and shipment tracking. Native sales do not require
+Shopify checkout or automatic order/inventory synchronization.
 
 The CRM owns conversations, customer relationship history, preferences learned
 through interaction, opportunities, attribution evidence, follow-up tasks,
 post-delivery feedback, and AI traceability. It presents concise order summaries
-and links the operator to Shopify Admin for complete order management.
+and links the operator to Shopify Admin for Shopify-channel order management.
+WhatsApp order management stays in the CRM.
 
 ## MVP capabilities
 
@@ -61,7 +66,10 @@ and links the operator to Shopify Admin for complete order management.
 - Ask product-discovery questions.
 - Search live Shopify products and variants.
 - Recommend no more than three appropriate products.
-- Create a Shopify cart or checkout path.
+- Register WhatsApp purchases from the conversation, with bank transfer or cash
+  on delivery, independently of Shopify.
+- Record payment and fulfillment changes separately, with an operator audit trail.
+- Create a Shopify cart or checkout path when the customer chooses that channel.
 - Receive Shopify order events and connect purchases to customers.
 - Represent direct Shopify purchases even when no earlier conversation exists.
 - Show the customer journey in an internal CRM timeline.
@@ -104,3 +112,5 @@ be implemented and authorized by application code.
 Customer profiles must be valid with only a WhatsApp identity or only a Shopify
 identity. Additional personal data is collected progressively and only when a
 purchase or fulfillment workflow requires it.
+
+See [Native WhatsApp orders](whatsapp-orders.md) for the primary purchase workflow.
