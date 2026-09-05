@@ -26,6 +26,7 @@ number.
 - Redesigned `/crm` for direct WhatsApp operations with prominent AI/human ownership, escalation handling, denser conversation navigation, and a safer reply composer.
 - Manager replies now pause AI automatically before delivery to prevent competing responses.
 - Added `/admin` to manage store-scoped WABA mappings and activation, inspect masked credential readiness, and edit core store settings without using the console.
+- Committed the conversation UX, responsive behavior, direct Cloud API operating model, and administration interface as `4dc044f`.
 - Committed the implementation as `d49f92b` and pushed `deliverable/DEL-005-manager-crm` to origin.
 - DEL-004 merged to `main` in pull request [#3](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/3) as merge commit `bb35d8e`.
 - Added signed Meta webhook verification, durable idempotent event ingestion, and per-customer job serialization.
@@ -62,6 +63,6 @@ number.
 
 ## Repository state
 
-- Current branch is `deliverable/DEL-005-manager-crm` at implementation commit `d49f92b`, tracking `origin/deliverable/DEL-005-manager-crm`.
+- Current branch is `deliverable/DEL-005-manager-crm` at implementation commit `4dc044f`, tracking `origin/deliverable/DEL-005-manager-crm`.
 - DEL-005 acceptance criteria are implemented; status remains `In Progress` until review and merge.
 - Inspect Git for exact commits after this handoff; Git remains authoritative.
