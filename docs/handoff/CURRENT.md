@@ -40,10 +40,10 @@ number.
 
 ## Next actions
 
-1. Protect `/admin` with authenticated administrator authorization before production access.
-2. Open a pull request linked to DEL-005 and set the deliverable to `In Review` with the PR URL.
-3. Review `/crm` and `/admin` on phone and desktop viewports.
-4. Perform a live manager-reply check with Meta's test number before merge.
+1. Open a pull request linked to DEL-005 and set the deliverable to `In Review` with the PR URL.
+2. Review `/crm` and `/admin` on physical phone and tablet browsers.
+3. Perform a live manager-reply check with Meta's test number before merge.
+4. Implement [DEL-009](../deliverables/DEL-009-operator-access-and-authorization.md) before production exposure of `/crm` or `/admin`.
 
 ## Validation
 
@@ -58,7 +58,7 @@ number.
 
 - No current repository blocker.
 - Meta credentials remain local and must not be committed.
-- `/admin` must be protected by administrator authentication and authorization before production deployment.
+- [DEL-009](../deliverables/DEL-009-operator-access-and-authorization.md) must protect `/crm` and `/admin` and replace hardcoded manager identity before production deployment.
 - Keep the live store number outside CRM automation until the DEL-005 manager inbox is production-ready and the direct Cloud API migration and rollback procedure is approved.
 
 ## Repository state

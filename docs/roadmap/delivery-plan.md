@@ -67,6 +67,7 @@ ad click -> WhatsApp conversation -> recommendation -> cart -> paid order -> CRM
 
 ## Phase 6: Controlled production pilot
 
+- Operator authentication, store-scoped roles, and protected CRM/admin routes
 - Internal and trusted-customer traffic
 - Daily conversation review
 - Kill-switch exercise

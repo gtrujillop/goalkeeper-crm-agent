@@ -31,6 +31,7 @@ the separate `Production` field.
 | [DEL-006](DEL-006-orders-and-attribution.md) | Orders and attribution | Backlog | `deliverable/DEL-006-orders-attribution` | — | No |
 | [DEL-007](DEL-007-controlled-production-pilot.md) | Controlled production pilot | Backlog | `deliverable/DEL-007-production-pilot` | — | No |
 | [DEL-008](DEL-008-retention-workflows.md) | Retention workflows | Backlog | `deliverable/DEL-008-retention-workflows` | — | No |
+| [DEL-009](DEL-009-operator-access-and-authorization.md) | Operator access and authorization | Backlog | `deliverable/DEL-009-operator-access` | — | No |
 
 Update this table in the same commit as any deliverable metadata change.
 
