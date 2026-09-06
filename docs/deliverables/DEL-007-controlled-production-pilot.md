@@ -39,6 +39,8 @@ known operating cost, observable quality, and a tested shutdown path.
 - DEL-004.
 - DEL-005.
 - Critical purchase handling from DEL-006.
+- DEL-009 operator access before production.
+- DEL-010 for live AI-assisted conversations.
 
 ## Out of scope
 

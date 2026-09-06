@@ -28,10 +28,11 @@ the separate `Production` field.
 | [DEL-003](DEL-003-shopify-catalogue-and-cart.md) | Shopify catalogue and cart | Done | `deliverable/DEL-003-shopify-catalogue-cart` | [#2](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/2) | No |
 | [DEL-004](DEL-004-whatsapp-messaging.md) | WhatsApp messaging | Done | `main` | [#3](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/3) | No |
 | [DEL-005](DEL-005-manager-crm-workspace.md) | Manager CRM workspace | Done | `deliverable/DEL-005-manager-crm` | [#4](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/4) | No |
-| [DEL-006](DEL-006-orders-and-attribution.md) | Orders and attribution | In Review | `deliverable/DEL-006-orders-attribution` | [#5](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/5) | No |
+| [DEL-006](DEL-006-orders-and-attribution.md) | Orders and attribution | Done | `deliverable/DEL-006-orders-attribution` | [#5](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/5) | No |
 | [DEL-007](DEL-007-controlled-production-pilot.md) | Controlled production pilot | Backlog | `deliverable/DEL-007-production-pilot` | — | No |
 | [DEL-008](DEL-008-retention-workflows.md) | Retention workflows | Backlog | `deliverable/DEL-008-retention-workflows` | — | No |
 | [DEL-009](DEL-009-operator-access-and-authorization.md) | Operator access and authorization | Backlog | `deliverable/DEL-009-operator-access` | — | No |
+| [DEL-010](DEL-010-ai-whatsapp-sales-assistant.md) | AI WhatsApp sales assistant | Backlog | `deliverable/DEL-010-ai-whatsapp-sales` | — | No |
 
 Update this table in the same commit as any deliverable metadata change.
 

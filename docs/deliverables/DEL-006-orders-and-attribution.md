@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Created | 2026-08-29 |
-| Status | In Review |
+| Status | Done |
 | Branch | `deliverable/DEL-006-orders-attribution` |
 | Pull request | [#5](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/5) |
 | Production | No |
@@ -120,4 +120,4 @@ must not silently overwrite contradictory customer evidence.
 
 - Shopify Admin `orders/paid` sample delivery validated on 2026-09-05 at 23:18:51 UTC: HTTP 200, event processed without error. This is sample data, not a real purchase or live checkout correlation test.
 
-- Committed implementation as `e10425b`, pushed the delivery branch, and opened PR [#5](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/5). Status is In Review; production remains No.
+- Committed implementation as `e10425b`, pushed the delivery branch, and opened PR [#5](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/5). Merged in `eb9c838` through PR #5; status is Done and production remains No.
