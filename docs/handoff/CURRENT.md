@@ -4,82 +4,54 @@
 | --- | --- |
 | Updated | 2026-09-05 |
 | Active deliverable | [DEL-006: Orders and attribution](../deliverables/DEL-006-orders-and-attribution.md) |
-| Status | In Progress |
+| Status | In Review |
 | Branch | `deliverable/DEL-006-orders-attribution` |
-| Pull request | — |
+| Pull request | [#5](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/5) |
 | Production | No |
 
 ## Current objective
 
-Review the WhatsApp-first DEL-006 workflow and prepare its pull request.
+Review DEL-006 PR #5. Implementation commit `e10425b` is pushed to origin.
 
 ## Completed
 
-- Branched from updated `main` at `076c618` (DEL-005 PR #4 merge).
-- Reconciled DEL-005 status to Done after the user's merge confirmation.
-- Implemented signed Shopify webhook ingestion, atomic event/job persistence,
-  idempotent lifecycle projections, conservative identity matching, signed cart
-  correlation, and reliable paid-opportunity conversion.
-- Added `/crm/orders` for direct purchases, identity reconciliation, event history,
-  payment/fulfillment context, evidence-backed first/last attribution, and internal
-  delivery follow-up tasks.
-- Added Meta referral capture, Google redirect tokens, and derived customer totals.
-- Added Admin setup and monitoring for DEL-006: domain, campaign WhatsApp number,
-  payment mappings, masked signing-secret status, setup instructions, campaign
-  link, reception/error counts, attribution counts, and recent store-scoped events.
-- Added native WhatsApp order entry from conversations with agreed item and
-  delivery snapshots, server-computed totals, transfer/COD methods, and explicit
-  opportunity linkage, independently of Shopify.
-- Added auditable independent payment/fulfillment transitions, submission
-  deduplication, store scoping and stale-screen rejection. Both channels appear
-  in order lists, customer context, attribution and follow-up.
-- Admin now shows native orders and pending transfer/COD counts above the optional
-  Shopify integration setup.
-- Updated durable product boundaries in AGENTS.md and linked product/domain docs
-  following the owner's confirmation that WhatsApp sales remain outside Shopify.
-- Applied `20260905170604_add_orders_and_attribution` and
-  `20260905173634_add_native_whatsapp_orders` to the local development DB.
+- Native WhatsApp order entry from conversations, agreed item/delivery snapshots,
+  transfer/COD payments, independent shipment tracking, auditable transitions,
+  deduplication, store scoping, and stale-screen protection.
+- Optional signed Shopify event ingestion and conservative customer/opportunity
+  correlation, shared order views, first/last attribution and delivery follow-up.
+- Admin setup, native pending-payment counts, and Shopify event monitoring.
+- Updated durable product boundaries for WhatsApp sales remaining outside Shopify.
+- Applied both DEL-006 migrations to the local development DB.
+- Committed and pushed implementation as `e10425b`; opened PR #5 against main.
 
 ## Required context
 
-- [DEL-006](../deliverables/DEL-006-orders-and-attribution.md), including its Required context links.
+- [DEL-006](../deliverables/DEL-006-orders-and-attribution.md) and its Required context links.
 
 ## Validation
 
 - `docker compose exec -e MIX_ENV=test app mix precommit`: 65 tests, 0 failures.
-- Tests cover signature verification, job persistence, duplicates, lifecycle order,
-  refunds, paid opportunity conversion, identity conflicts, store isolation,
-  unknown revenue, token expiry/replay, redirect routing, and LiveView follow-up.
-
-- Local `/crm/orders` returned HTTP 200; inspected its empty-state layout in
-  headless Chrome at 390px phone and 1440px desktop widths. Populated-order actions have LiveView coverage.
-
-- Admin setup/monitoring tests cover validation, persistence, clearing, store
-  isolation, refresh, and secret masking. Phone and desktop browser layouts checked.
-- The user configured the Shopify webhook secret in local `.env`; the app was
-  recreated and the running container confirms it is present without revealing it.
-- Public ngrok health returned HTTP 200 after startup.
-- Shopify Admin orders/paid test received on 2026-09-05 at 23:18:51 UTC: ngrok
-  recorded HTTP 200 and the store-scoped event is processed with no error. This
-  validates signed sample delivery; a real checkout correlation check remains pending.
-- The campaign WhatsApp destination was previously unset and was not changed.
-
-- Native order tests cover totals, snapshots, duplicate creation, opportunity
-  conversion, independent COD payment/delivery, refunds, invalid transitions,
-  store isolation and stale forms. Native entry inspected at 390px and 1440px.
+- Native and Shopify domain/LiveView tests cover identity and store isolation,
+  duplicates, lifecycle events, payment/delivery independence, audit revisions,
+  stale forms, attribution evidence, token expiry/replay, and Admin monitoring.
+- Browser inspection at 390px and 1440px for orders, native entry and Admin.
+- User configured the Shopify signing secret locally; app recreated with the
+  secret present and public ngrok health returning HTTP 200.
+- Shopify Admin orders/paid sample received 2026-09-05 at 23:18:51 UTC: HTTP 200,
+  processed without error, sample order #9999 projected with supplied voided
+  financial status. Real checkout correlation has not been validated.
 
 ## Next actions / external requirements
 
-1. Review conversation → Registrar pedido → payment/delivery → attribution,
-   then open the DEL-006 PR.
-2. For the optional Shopify channel, configure its signing secret/subscriptions
-   and validate checkout correlation/webhook delivery before enabling that channel.
-   Native WhatsApp orders do not require this setup.
-3. DEL-009 must protect native order creation/detail routes, `/crm/orders`, `/crm`,
-   and `/admin` and replace the development Manager actor label before production.
+1. Review and merge PR #5 when accepted; Done means merged, not deployed.
+2. Validate a real Shopify checkout-to-order correlation before enabling that
+   optional channel in production. Native WhatsApp orders require no Shopify setup.
+3. DEL-009 must protect CRM/Admin/native-order routes and replace the development
+   Manager actor label before production.
 
 ## Repository state
 
-- Branch is `deliverable/DEL-006-orders-attribution`; base commit is `076c618`.
-- DEL-006 implementation and documentation are uncommitted. No DEL-006 PR exists.
-- No production deployment or live commerce/message side effects performed.
+- Branch tracks `origin/deliverable/DEL-006-orders-attribution`; base is `076c618`.
+- Implementation commit: `e10425b`. PR metadata is recorded in a follow-up commit.
+- No production deployment or real commerce/message side effects performed.
