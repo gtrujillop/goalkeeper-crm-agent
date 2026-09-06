@@ -77,6 +77,77 @@ fine-tuning nor a vector database. Retrieve current commercial facts on demand.
 If catalogue size later justifies semantic search, revalidate selected variants
 and prices against the live source before making an offer.
 
+## Selected providers and sustainable operation
+
+The owner selected OpenAI GPT-5.6 Luna (`gpt-5.6-luna`) and Google Gemini
+3.1 Flash-Lite (`gemini-3.1-flash-lite`) as the first two evaluation candidates.
+Neither is yet the production winner. Verify exact API availability, tool contracts
+and current prices during implementation; do not silently substitute another model.
+Use Req adapters behind the existing provider boundary with normalized usage and
+provider-specific tool-call handling. Retain deterministic fakes for ordinary tests.
+Claude, DeepSeek and other providers are deferred. Local/open-weight hosting is a
+future alternative; the owner has no hosting hardware. Business knowledge comes
+from retrieval, policies and memory, not initial fine-tuning.
+
+Use one bounded assistant, compact recent history and summaries, a few relevant
+catalogue results, short outputs and bounded tool rounds/retries. Group bursts of
+customer messages. Duplicate webhooks, delivery receipts and bookkeeping must not
+invoke a model. Cache stable policy/product descriptions with explicit freshness;
+recheck selected prices and inventory. Account for summary generation, evaluations,
+retries and any fallback calls in the same spending ledger.
+
+Before each paid request, atomically reserve a conservative maximum request cost
+against store daily/monthly and per-conversation budgets, including concurrent runs.
+Bound input and all billable output/reasoning; retain the price/version used for
+accounting. Reconcile provider usage on completion. Unknown usage after a timeout
+must retain a conservative charge/reservation until resolved; retries need their
+own allowance. Unknown pricing or absent budget configuration must not permit
+unbounded paid calls. Exhaustion stops AI and routes to human handling with an
+operator notification. Fallbacks are explicit and share the same budget; never
+silently upgrade to a more expensive model.
+
+The owner has not supplied a numerical monthly budget or paid evaluation cap.
+Implementation and fake-adapter tests can proceed; obtain those values before
+paid evaluation/automatic traffic. Do not treat the earlier illustrative token
+cost comparison as measured usage or an approved spending allowance.
+
+## Admin AI configuration and usage
+
+Provide a dedicated, store-scoped Admin section with:
+
+- Enable/pause AI, provider/model selection from the supported allowlist, and
+  manager-review versus automatic-reply mode. Save versioned sales instructions
+  and policy references; editable instructions cannot override application rules.
+- Daily/monthly and per-conversation spending limits, warning thresholds and
+  remaining budget including outstanding reservations.
+- Environment-managed credential readiness without showing or editing API keys.
+- Date/model filters; input, cached input, output and billable reasoning usage
+  where reported; request/conversation counts, estimated spend, average cost per
+  conversation, latency, failures and handoffs. Avoid double-counting reasoning
+  tokens included in provider output totals.
+- Conversation/run drill-down showing model, tools, usage and escalation reason.
+  Separate calculated API cost from the provider invoice; expose missing usage.
+
+Test store isolation, concurrent budget reservations, exhausted budgets, uncertain
+usage, failed calls, pricing changes and takeover during generation. DEL-009 owns
+real operator authentication/authorization before production.
+
+## Provider comparison plan
+
+Run the two candidates against the same versioned Spanish sales scenarios,
+catalogue fixtures, policies and bounded context. Start with deterministic adapter
+contract tests and a replay runner, then a capped paid comparison targeting 50–100
+reviewed scenarios. Use anonymized historical examples when available and clearly
+label synthetic fixtures. Cover size/budget changes, prior recommendations, COD,
+transfers, inventory changes, unavailable facts and handoff.
+
+Record per-scenario total cost across all calls, latency, tool correctness,
+groundedness, memory, tone and manager corrections. Invented commercial facts,
+unauthorized payment confirmation and cross-customer leakage fail the evaluation.
+Choose the primary model by cost per successfully handled conversation, not token
+price alone; record results and any explicitly configured fallback. No comparative
+quality results or live provider validation exist yet.
+
 ## Catalogue and policy readiness
 
 Product descriptions alone may not support informed goalkeeper advice. Audit

@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Created | 2026-09-05 |
-| Status | Backlog |
+| Status | Selected |
 | Branch | `deliverable/DEL-010-ai-whatsapp-sales` |
 | Pull request | — |
 | Production | No |
@@ -17,7 +17,9 @@ takeover and WhatsApp purchases supported outside Shopify.
 
 ## Scope
 
-- Real AI provider and live catalogue wiring with store-specific enablement.
+- OpenAI GPT-5.6 Luna and Gemini 3.1 Flash-Lite adapters and comparative evaluation.
+- Live catalogue wiring with store-specific enablement.
+- Dedicated Admin AI configuration, model usage statistics and enforced budgets.
 - Bounded conversation memory, confirmed facts and approved policy context.
 - Rich product/variant retrieval and validated, traceable tool calls.
 - Manager-review mode followed by restricted text auto-replies.
@@ -34,7 +36,12 @@ takeover and WhatsApp purchases supported outside Shopify.
 - [ ] Human takeover suppresses in-flight automated replies and tools respect store boundaries.
 - [ ] Strict tool contracts and business validation reject invalid or unauthorized actions.
 - [ ] Network calls do not hold long database transactions; retries preserve processing progress and handle ambiguous sends.
-- [ ] Manager review, usage/cost visibility, budgets and store enablement are available.
+- [ ] Both selected provider adapters pass contract tests and a capped comparison records quality, latency and total cost per conversation.
+- [ ] Admin configures store AI mode, approved provider/model, versioned sales instructions and budget thresholds without exposing secrets.
+- [ ] Admin reports usage/spend by model and date, remaining budget, latency/failures and conversation/run details; estimates are distinguished from invoices.
+- [ ] Concurrent requests reserve cost before calling providers; daily/monthly/conversation limits include retries, summaries and fallbacks.
+- [ ] Exhausted/unconfigured budgets, unknown prices and uncertain usage cannot cause unbounded spend; operators see why AI stops.
+- [ ] Compact context, bounded outputs/tools and burst grouping limit usage; non-conversational events do not invoke AI.
 - [ ] Evaluations cover grounded recommendations, memory, failures, duplicates and takeover races.
 
 ## Required context
@@ -58,12 +65,16 @@ takeover and WhatsApp purchases supported outside Shopify.
 - Automatic payment verification, refunds, discounts or inventory synchronization.
 - Autonomous confirmation of native orders without manager review.
 - Voice/image understanding, fine-tuning and a vector database.
+- Local model hosting and providers beyond the selected OpenAI/Gemini pair.
 
 ## Delivery notes
 
 Defined following the owner's request for integration analysis after DEL-006
-merged. Implementation has not started; provider/model selection and business
-policy readiness are tracked in the linked analysis. No live AI was enabled.
+merged. The owner selected this deliverable for the next session with OpenAI
+GPT-5.6 Luna and Gemini 3.1 Flash-Lite. Implementation has not started. The linked
+analysis records Admin scope, sustainability requirements and evaluation plan.
+Numerical budgets and API credential readiness remain to be established before
+paid calls. No live AI was enabled.
 
 Owner confirmed Shopify stock is updated after all sales, with a matching XLSX
 inventory document. Live AI stock reads use Shopify; spreadsheet ingestion and

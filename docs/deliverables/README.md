@@ -32,7 +32,7 @@ the separate `Production` field.
 | [DEL-007](DEL-007-controlled-production-pilot.md) | Controlled production pilot | Backlog | `deliverable/DEL-007-production-pilot` | — | No |
 | [DEL-008](DEL-008-retention-workflows.md) | Retention workflows | Backlog | `deliverable/DEL-008-retention-workflows` | — | No |
 | [DEL-009](DEL-009-operator-access-and-authorization.md) | Operator access and authorization | Backlog | `deliverable/DEL-009-operator-access` | — | No |
-| [DEL-010](DEL-010-ai-whatsapp-sales-assistant.md) | AI WhatsApp sales assistant | Backlog | `deliverable/DEL-010-ai-whatsapp-sales` | — | No |
+| [DEL-010](DEL-010-ai-whatsapp-sales-assistant.md) | AI WhatsApp sales assistant | Selected | `deliverable/DEL-010-ai-whatsapp-sales` | — | No |
 
 Update this table in the same commit as any deliverable metadata change.
 

@@ -3,45 +3,53 @@
 | Field | Value |
 | --- | --- |
 | Updated | 2026-09-05 |
-| Active deliverable | [DEL-006: Orders and attribution](../deliverables/DEL-006-orders-and-attribution.md) |
-| Status | Done |
-| Branch | `main` |
-| Pull request | [#5](https://github.com/gtrujillop/goalkeeper-crm-agent/pull/5), merged |
+| Active deliverable | [DEL-010: AI WhatsApp sales assistant](../deliverables/DEL-010-ai-whatsapp-sales-assistant.md) |
+| Status | Selected; implementation not started |
+| Current branch | `main` |
+| Implementation branch to create | `deliverable/DEL-010-ai-whatsapp-sales` |
+| Pull request | — |
 | Production | No |
 
 ## Completed
 
-- Merged PR #5 as `eb9c838`; updated local main from origin/main.
-- DEL-006 provides native WhatsApp orders, independent transfer/COD payment and
-  fulfillment tracking, optional Shopify events, attribution and Admin monitoring.
-- Documented [AI integration analysis](../ai/shopify-whatsapp-integration.md)
-  against merged code and defined [DEL-010](../deliverables/DEL-010-ai-whatsapp-sales-assistant.md)
-  in Backlog. No real AI adapter was implemented or enabled.
-- DEL-007 now names real AI and operator authorization as production prerequisites.
+- DEL-006 merged in PR #5 as `eb9c838`; AI analysis recorded in `2a27635`.
+- Inventory clarification recorded in `6046431`.
+- Owner selected DEL-010 for the next session, beginning with OpenAI GPT-5.6 Luna
+  and Gemini 3.1 Flash-Lite. Updated deliverable, board and durable AI design with
+  Admin configuration/usage reporting, spending controls and comparison scope.
+- No real AI adapter, paid comparison or automatic AI traffic has been enabled.
 
 ## Required context
 
-- [DEL-006](../deliverables/DEL-006-orders-and-attribution.md) and its Required context links.
-- [AI integration analysis](../ai/shopify-whatsapp-integration.md) for the proposed next work.
+- Read [DEL-010](../deliverables/DEL-010-ai-whatsapp-sales-assistant.md) completely
+  and its Required context links, especially the integration analysis sections on
+  selected providers, sustainable operation, Admin and the comparison plan.
+
+## Next session: concrete actions
+
+1. Start from updated main; create `deliverable/DEL-010-ai-whatsapp-sales` and mark
+   DEL-010 In Progress in the deliverable and board.
+2. Inspect existing Engine, provider behaviour, Shopify adapter and webhook worker.
+   Build the common usage/budget ledger and provider contracts with deterministic
+   tests before real calls. Preserve immediate takeover and durable processing.
+3. Implement both selected Req adapters and runtime wiring, bounded memory/tools,
+   rich catalogue retrieval, and the dedicated Admin AI section. Verify current
+   model IDs, API contracts and rates against official provider documentation.
+4. Build the shared Spanish replay/evaluation set and runner. Obtain numerical
+   evaluation/operating budgets and verify credentials before paid calls; these
+   missing values do not block implementation or fake-adapter tests.
+5. Run the capped comparison, record evidence, choose a primary model, and proceed
+   through manager review before restricted automatic replies. No winner assumed.
 
 ## Validation
 
-- `docker compose exec -e MIX_ENV=test app mix precommit`: 65 tests, 0 failures on merged main with documentation updates.
-- Previous DEL-006 browser inspections passed at 390px and 1440px.
-- Shopify Admin orders/paid sample received 2026-09-05 at 23:18:51 UTC:
-  HTTP 200 and processed without error. Real checkout correlation remains untested.
+- `docker compose exec -e MIX_ENV=test app mix precommit`: 65 tests, 0 failures for this documentation update.
+- Prior baseline: 65 tests, 0 failures. No provider quality/cost benchmark run.
+- Shopify signed Admin sample previously processed successfully; real checkout
+  correlation remains untested and is separate from native WhatsApp sales.
 
-## Next actions / external requirements
+## External requirements
 
-1. Select DEL-010 when beginning AI implementation; start its branch from main.
-2. Prepare approved product/sales-policy data for DEL-010. Owner answered the
-   inventory question; the confirmed source and process are recorded in
-   [Shopify integration](../integrations/shopify.md#inventory-across-sales-channels).
-3. Validate real Shopify checkout correlation before enabling that optional channel.
-4. Complete DEL-009 operator protection before production; DEL-007 owns rollout.
-
-## Repository state
-
-- Main contains DEL-006 merge `eb9c838` and AI analysis commit `2a27635`.
-- Follow-up documentation records the owner's inventory clarification. Production
-  remains undeployed.
+- Approved sales/delivery policies and sufficiently detailed product data.
+- Numerical budgets, provider API access and credentials are not yet verified.
+- DEL-009 operator access before production; DEL-007 owns production rollout.

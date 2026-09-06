@@ -27,12 +27,14 @@ Define an application behaviour with normalized request and response types:
 
 ```text
 StoreCRM.AI.Provider
-├── StoreCRM.AI.OpenAI
-└── StoreCRM.AI.Fake
+├── StoreCRM.AI.OpenAI (planned)
+├── StoreCRM.AI.Gemini (planned)
+└── StoreCRM.AI.FakeProvider (existing)
 ```
 
-Additional providers can be introduced only when evaluation evidence supports
-the work.
+The owner selected OpenAI GPT-5.6 Luna and Gemini 3.1 Flash-Lite for DEL-010
+evaluation. See [selected providers, budgets and Admin controls](shopify-whatsapp-integration.md#selected-providers-and-sustainable-operation).
+Additional providers remain deferred until evaluation evidence supports the work.
 
 ## Initial tools
 
