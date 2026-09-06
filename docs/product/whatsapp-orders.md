@@ -11,7 +11,10 @@ its own commerce records.
 Native order entry works without Shopify credentials, webhooks, carts or order
 IDs. Catalogue lookup may still use Shopify; entering a native sale does not
 create a Shopify order or reserve/decrement inventory. Inventory synchronization
-and a broader stock ledger are not part of this workflow.
+and a broader stock ledger are not part of this workflow. The owner confirms
+Shopify stock is updated after every sale across channels, with a matching XLSX
+inventory document. This existing operational process remains responsible for
+stock adjustments; see [inventory source](../integrations/shopify.md#inventory-across-sales-channels).
 
 ## Operator flow
 

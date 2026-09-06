@@ -93,13 +93,15 @@ necessary order details. Customer claims and uploaded payment receipts must not
 automatically mark an order paid. Audio and image understanding are later scope;
 the first pilot covers text with a clear handoff for unsupported media.
 
-**Open operational question:** does staff reconcile Shopify inventory after
-WhatsApp sales, or is physical stock maintained elsewhere? Native CRM sales do
-not synchronize inventory. Until a reliable source/reconciliation process is
-established, Shopify availability is channel information, not a guarantee of
-physical stock for a WhatsApp sale. Require staff stock confirmation before a
-binding native order commitment. This does not require moving WhatsApp orders
-into Shopify.
+**Confirmed inventory source (owner, 2026-09-05):** Shopify inventory is updated
+after every sale, including WhatsApp and direct sales. The owner also maintains a
+matching XLSX inventory document. Use Shopify for live AI availability answers;
+the spreadsheet can support reconciliation without an initial runtime import.
+The cross-channel stock question is resolved. Native CRM order creation itself
+still performs no stock adjustment; preserve the existing update process to avoid
+double-decrementing inventory. Recheck the selected variant before confirmation;
+a lookup is not a reservation. Escalate missing inventory or reported discrepancies.
+See [inventory responsibilities](../integrations/shopify.md#inventory-across-sales-channels).
 
 ## Delivery stages and evidence
 

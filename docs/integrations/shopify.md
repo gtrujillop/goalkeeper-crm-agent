@@ -15,6 +15,20 @@ refunds, fulfillment administration, inventory management, product management,
 and financial reporting continue in Shopify. CRM screens provide concise context
 and direct links to the corresponding Shopify customer, product, and order.
 
+## Inventory across sales channels
+
+The owner confirmed on 2026-09-05 that Shopify inventory is updated after every
+sale, including WhatsApp and direct sales. A separate XLSX inventory document is
+maintained with matching stock. Use Shopify as the live inventory source for AI
+catalogue answers across channels; the spreadsheet is a reconciliation reference,
+not a second runtime dependency or an implemented import.
+
+This operational process is separate from CRM automation: registering a native
+order does not update Shopify inventory or create a Shopify order. Do not add an
+automatic decrement that would duplicate the existing stock update. Recheck the
+selected variant before order confirmation; a stock lookup does not reserve it.
+If inventory cannot be retrieved or a discrepancy is reported, request human help.
+
 ## Initial product tools
 
 ```text

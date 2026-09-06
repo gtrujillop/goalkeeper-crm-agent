@@ -34,12 +34,14 @@
 ## Next actions / external requirements
 
 1. Select DEL-010 when beginning AI implementation; start its branch from main.
-2. Resolve physical-stock reconciliation and approved product/sales-policy data
-   as described in the analysis. Inventory question sent to owner; answer pending.
+2. Prepare approved product/sales-policy data for DEL-010. Owner answered the
+   inventory question; the confirmed source and process are recorded in
+   [Shopify integration](../integrations/shopify.md#inventory-across-sales-channels).
 3. Validate real Shopify checkout correlation before enabling that optional channel.
 4. Complete DEL-009 operator protection before production; DEL-007 owns rollout.
 
 ## Repository state
 
-- Main contains DEL-006 merge `eb9c838`; follow-up documentation records completion
-  and proposed AI work. Production remains undeployed.
+- Main contains DEL-006 merge `eb9c838` and AI analysis commit `2a27635`.
+- Follow-up documentation records the owner's inventory clarification. Production
+  remains undeployed.

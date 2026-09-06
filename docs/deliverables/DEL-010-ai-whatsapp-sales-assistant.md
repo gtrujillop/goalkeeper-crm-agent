@@ -50,7 +50,8 @@ takeover and WhatsApp purchases supported outside Shopify.
 - DEL-002 orchestration foundation; DEL-003 catalogue; DEL-004 WhatsApp transport.
 - DEL-005 manager workspace; DEL-006 native orders.
 - DEL-009 operator authorization before production; DEL-007 owns production rollout.
-- Approved product/policy data and an explicit physical-stock confirmation process.
+- Approved product/policy data. Shopify is the confirmed cross-channel inventory
+  source; retain the existing operational stock-update process.
 
 ## Out of scope
 
@@ -63,3 +64,7 @@ takeover and WhatsApp purchases supported outside Shopify.
 Defined following the owner's request for integration analysis after DEL-006
 merged. Implementation has not started; provider/model selection and business
 policy readiness are tracked in the linked analysis. No live AI was enabled.
+
+Owner confirmed Shopify stock is updated after all sales, with a matching XLSX
+inventory document. Live AI stock reads use Shopify; spreadsheet ingestion and
+automated inventory writes remain outside this scope.
