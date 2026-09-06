@@ -1,7 +1,7 @@
 # Goalkeeper CRM Agent instructions
 
-This is an AI-assisted conversational CRM for a Shopify goalkeeper-equipment
-store. It is a Phoenix web application, initially serving the Colombian market.
+This is an AI-assisted conversational CRM for a goalkeeper-equipment store
+selling primarily through WhatsApp, with Shopify as another sales channel. It is a Phoenix web application, initially serving the Colombian market.
 
 ## Required session startup
 
@@ -42,7 +42,10 @@ state, not an append-only diary and not a substitute for Git history.
 
 ## Product invariants
 
-- Shopify remains the commerce system of record; do not rebuild its administration.
+- WhatsApp is the primary sales channel. The CRM owns orders, payment evidence,
+  and fulfillment tracking for WhatsApp sales that remain outside Shopify.
+- Shopify is another sales channel and owns its own commerce records; do not
+  rebuild its administration or require WhatsApp orders to exist in Shopify.
 - The CRM owns relationships, conversations, traceability, attribution evidence,
   follow-up, and human takeover.
 - The initial seeded store profile is Colombia (`CO`, `es-CO`, COP,

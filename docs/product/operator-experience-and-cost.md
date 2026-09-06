@@ -42,8 +42,10 @@ Show only relationship-relevant information:
 - Shipment and post-delivery follow-up state
 - Acquisition evidence
 
-Provide clear actions such as `Open order in Shopify`, `Open customer in Shopify`,
-and `Track shipment with TCC`. Do not reproduce full Shopify order management.
+Provide `Register WhatsApp order` from the conversation and native actions to
+record payment evidence, shipment, delivery, cancellation and completed refunds.
+Keep payment and shipment independent. Shopify-channel records offer `Open order
+in Shopify`; do not reproduce Shopify administration.
 
 ### Tasks
 
@@ -70,7 +72,8 @@ when known, and estimated operating cost.
 - Use progressive disclosure for technical traces.
 - Design LiveView screens mobile-first.
 - Require few clicks for the most frequent manager actions.
-- Keep Shopify as the destination for detailed commerce administration.
+- Keep native WhatsApp order management in the CRM and Shopify-channel
+  administration in Shopify.
 
 ## AI usage boundary
 
@@ -115,7 +118,7 @@ A non-technical manager can:
 - Verify a bank transfer.
 - Confirm a cash-on-delivery order.
 - Find a customer's relationship history.
-- Open authoritative order details in Shopify.
+- Open native WhatsApp order details in the CRM and Shopify-channel orders in Shopify.
 - See known acquisition evidence without requiring it.
 - Follow up on delivery and resolve an issue.
 - Understand current application and AI cost.

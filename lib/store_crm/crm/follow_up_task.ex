@@ -4,6 +4,7 @@ defmodule StoreCRM.CRM.FollowUpTask do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "follow_up_tasks" do
+    belongs_to :order_summary, StoreCRM.CRM.OrderSummary
     field :title, :string
     field :due_at, :utc_datetime
     field :status, :string, default: "open"

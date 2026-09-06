@@ -4,10 +4,14 @@ defmodule StoreCRMWeb.AdminLive do
   alias StoreCRM.Messaging
   alias StoreCRM.Messaging.WhatsAppAccount
   alias StoreCRM.Stores
+  alias StoreCRM.Commerce.{IntegrationSettings, IntegrationMonitor}
+  alias StoreCRMWeb.OrderIntegrationComponents
 
   @impl true
   def mount(_params, _session, socket) do
     store = Stores.get_profile_by_slug!("colombia")
+
+    if connected?(socket), do: StoreCRM.Conversations.subscribe(store.id)
 
     {:ok,
      socket
@@ -15,12 +19,53 @@ defmodule StoreCRMWeb.AdminLive do
      |> assign(:page_title, "Administración")
      |> assign(:credential_status, credential_status())
      |> assign(:account, %WhatsAppAccount{store_profile_id: store.id, active: true})
+     |> assign(:integration_base_url, StoreCRMWeb.Endpoint.url())
+     |> assign_integration_form(store)
+     |> load_integration()
      |> assign_store_form(store)
      |> assign_account_form()
      |> load_accounts()}
   end
 
   @impl true
+  def handle_params(_, uri, socket) do
+    url = URI.parse(uri)
+    base = %{url | path: nil, query: nil, fragment: nil} |> URI.to_string()
+    {:noreply, assign(socket, :integration_base_url, base)}
+  end
+
+  @impl true
+  def handle_info({:conversation_changed, _}, socket), do: {:noreply, load_integration(socket)}
+
+  @impl true
+  def handle_event("refresh_integration", _, socket), do: {:noreply, load_integration(socket)}
+
+  def handle_event("validate_integration", %{"integration_settings" => attrs}, socket) do
+    changeset =
+      socket.assigns.store |> IntegrationSettings.change(attrs) |> Map.put(:action, :validate)
+
+    {:noreply, assign(socket, :integration_form, to_form(changeset))}
+  end
+
+  def handle_event("save_integration", %{"integration_settings" => attrs}, socket) do
+    case IntegrationSettings.save(socket.assigns.store, attrs) do
+      {:ok, store} ->
+        {:noreply,
+         socket
+         |> assign(:store, store)
+         |> assign_integration_form(store)
+         |> assign_store_form(store)
+         |> load_integration()
+         |> put_flash(
+           :info,
+           "Configuración de pedidos y atribución guardada. Comprueba la recepción de eventos para confirmar la conexión."
+         )}
+
+      {:error, changeset} ->
+        {:noreply, assign(socket, :integration_form, to_form(changeset))}
+    end
+  end
+
   def handle_event("new_account", _, socket) do
     account = %WhatsAppAccount{store_profile_id: socket.assigns.store.id, active: true}
     {:noreply, socket |> assign(:account, account) |> assign_account_form()}
@@ -78,11 +123,28 @@ defmodule StoreCRMWeb.AdminLive do
          socket
          |> assign(:store, store)
          |> assign_store_form(store)
+         |> assign_integration_form(store)
+         |> load_integration()
          |> put_flash(:info, "Configuración de la tienda guardada.")}
 
       {:error, changeset} ->
         {:noreply, assign(socket, :store_form, to_form(changeset))}
     end
+  end
+
+  defp assign_integration_form(socket, store),
+    do: assign(socket, :integration_form, store |> IntegrationSettings.change() |> to_form())
+
+  defp load_integration(socket) do
+    snapshot = IntegrationMonitor.snapshot(socket.assigns.store)
+
+    socket
+    |> assign(:integration_status, Map.delete(snapshot, :events))
+    |> assign(
+      :shopify_secret_ready,
+      configured?(Application.get_env(:store_crm, :shopify_webhook_secret))
+    )
+    |> stream(:shopify_events, snapshot.events, reset: true)
   end
 
   defp load_accounts(socket) do
@@ -123,13 +185,22 @@ defmodule StoreCRMWeb.AdminLive do
             <p class="text-xs font-bold uppercase tracking-[.2em] text-emerald-700">Operación</p>
             <h1 class="mt-1 text-3xl font-bold tracking-tight text-slate-950">Administración</h1>
             <p class="mt-1 max-w-2xl text-sm text-slate-600">
-              Configura los canales de WhatsApp y los datos operativos de cada tienda.
+              Configura WhatsApp, conecta los pedidos de Shopify y verifica la atribución.
             </p>
           </div>
           <span class="inline-flex w-fit items-center gap-2 rounded-full bg-slate-100 px-3 py-2 text-xs font-bold text-slate-700">
             <.icon name="hero-building-storefront" class="size-4" /> {@store.name}
           </span>
         </header>
+
+        <OrderIntegrationComponents.panel
+          store={@store}
+          form={@integration_form}
+          status={@integration_status}
+          secret_ready={@shopify_secret_ready}
+          base_url={@integration_base_url}
+          events={@streams.shopify_events}
+        />
 
         <div class="grid gap-6 xl:grid-cols-[1.08fr_.92fr]">
           <section

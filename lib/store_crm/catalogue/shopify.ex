@@ -7,6 +7,7 @@ defmodule StoreCRM.Catalogue.Shopify do
   @cart ~S|mutation Cart($input: CartInput!) { cartCreate(input: $input) { cart { id checkoutUrl cost { totalAmount { currencyCode } } } userErrors { field message } } }|
 
   def execute(name, arguments, context) when name in ["search_products", "create_cart"] do
+    context = if name == "create_cart", do: StoreCRM.Commerce.cart_context(context), else: context
     store = Stores.get_profile!(context.store_profile_id)
 
     with {:ok, configuration} <- configuration(store),
@@ -48,6 +49,7 @@ defmodule StoreCRM.Catalogue.Shopify do
            %{
              input: %{
                lines: value(arguments, "lines", []),
+               attributes: [%{key: "gk_correlation", value: context.correlation_token}],
                buyerIdentity: %{countryCode: context.market}
              }
            }}
@@ -71,12 +73,14 @@ defmodule StoreCRM.Catalogue.Shopify do
   defp normalize(
          "create_cart",
          %{"cartCreate" => %{"cart" => cart, "userErrors" => []}},
-         _context
+         context
        )
        when not is_nil(cart),
        do:
          {:ok,
           %{
+            "correlation_token" => Map.get(context, :correlation_token),
+            "opportunity_id" => Map.get(context, :opportunity_id),
             "id" => cart["id"],
             "checkout_url" => cart["checkoutUrl"],
             "currency" => get_in(cart, ["cost", "totalAmount", "currencyCode"]),

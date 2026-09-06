@@ -215,6 +215,11 @@ defmodule StoreCRMWeb.CRMLive do
   def render(assigns) do
     ~H"""
     <Layouts.app flash={@flash}>
+      <.link
+        id="orders-link"
+        navigate={~p"/crm/orders"}
+        class="mb-4 inline-block text-sm font-semibold text-emerald-700 hover:underline"
+      >Pedidos y atribución →</.link>
       <div id="crm-workspace" class="space-y-4">
         <header class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -353,6 +358,11 @@ defmodule StoreCRMWeb.CRMLive do
                 </div>
               </div>
               <div class="flex flex-wrap items-center gap-2">
+                <.link
+                  id="register-whatsapp-order"
+                  navigate={~p"/crm/conversations/#{@selected.conversation.id}/orders/new"}
+                  class="inline-flex items-center gap-2 rounded-xl bg-emerald-950 px-3 py-2.5 text-xs font-bold text-white hover:bg-emerald-800"
+                ><.icon name="hero-shopping-bag" class="size-4" /> Registrar pedido</.link>
                 <button
                   id="assign-button"
                   phx-click="assign"
@@ -557,12 +567,16 @@ defmodule StoreCRMWeb.CRMLive do
                 </div>
                 <div id="order-summaries">
                   <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">
-                    Pedidos Shopify
+                    Pedidos del cliente
                   </h3><a
                     :for={order <- @selected.orders}
                     id={"order-#{order.id}"}
-                    href={order.shopify_admin_url}
-                    target="_blank"
+                    href={
+                      if order.order_channel == "whatsapp",
+                        do: ~p"/crm/orders/#{order.id}",
+                        else: order.shopify_admin_url
+                    }
+                    target={if order.order_channel == "whatsapp", do: "_self", else: "_blank"}
                     rel="noopener noreferrer"
                     class="mt-2 block rounded-xl border border-slate-200 p-3 transition hover:border-emerald-500"
                   ><span class="font-bold">{order.order_name}</span><span class="block text-xs text-slate-500">{money(

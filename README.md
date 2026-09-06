@@ -1,7 +1,8 @@
 # Goalkeeper CRM Agent
 
 An AI-assisted conversational commerce and customer relationship platform for a
-small Shopify store selling goalkeeper gloves and other wearables.
+small goalkeeper-equipment store selling primarily through WhatsApp, with Shopify
+as an additional sales channel.
 
 The product will connect WhatsApp, Shopify, advertising attribution, a CRM, and
 AI-assisted sales conversations. It is deliberately designed as an economical
@@ -39,6 +40,7 @@ The current architectural recommendation is recorded in
 - [Product vision and scope](docs/product/vision-and-scope.md)
 - [Markets and store profiles](docs/product/markets-and-store-profiles.md)
 - [Customer journeys](docs/product/customer-journeys.md)
+- [Native WhatsApp order workflow](docs/product/whatsapp-orders.md)
 - [Operator experience and cost guardrails](docs/product/operator-experience-and-cost.md)
 - [System architecture](docs/architecture/system-architecture.md)
 - [Domain model](docs/domain/domain-model.md)
@@ -59,9 +61,10 @@ The model may decide which information or action it needs. Deterministic
 application code decides whether that action is authorized and how it is
 performed.
 
-Shopify remains the commerce system of record. This application owns customer
-relationships, conversations, attribution evidence, follow-up, and AI-assisted
-sales; it links to Shopify for detailed commerce administration.
+The CRM owns WhatsApp sales, their payment evidence and fulfillment tracking,
+alongside relationships, conversations, attribution and follow-up. These sales
+remain outside Shopify. Shopify owns commerce records for its own sales channel;
+its detailed administration stays in Shopify.
 
 ## Current status
 
@@ -79,9 +82,10 @@ The executable foundation is now in place:
 - a live Shopify catalogue and test-cart workspace at <http://localhost:4000/shopify>
 - a mobile-friendly manager CRM workspace at <http://localhost:4000/crm>
 
-DEL-005 is in progress on its delivery branch with the manager CRM workspace
-implemented and covered by deterministic tests. Live Shopify and WhatsApp
-credentials remain local and are not required by the automated quality gate.
+DEL-005 is merged. DEL-006 adds native WhatsApp order entry and payment/delivery
+tracking, optional Shopify order ingestion, and shared follow-up and attribution at
+<http://localhost:4000/crm/orders>. Live provider credentials remain local and are
+not required by the automated quality gate.
 
 ## Local development
 

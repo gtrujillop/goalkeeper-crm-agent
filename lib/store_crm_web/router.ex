@@ -18,6 +18,10 @@ defmodule StoreCRMWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    live "/crm/orders", OrdersLive
+    live "/crm/orders/:id", NativeOrderLive, :show
+    live "/crm/conversations/:conversation_id/orders/new", NativeOrderLive, :new
+    get "/r/:store/google", AcquisitionController, :redirect_to_whatsapp
     live "/crm", CRMLive
     live "/crm/conversations/:id", CRMLive
     live "/admin", AdminLive
@@ -35,6 +39,7 @@ defmodule StoreCRMWeb.Router do
     pipe_through :api
     get "/whatsapp", WhatsAppWebhookController, :verify
     post "/whatsapp", WhatsAppWebhookController, :receive
+    post "/shopify", ShopifyWebhookController, :receive
   end
 
   # Other scopes may use custom stacks.

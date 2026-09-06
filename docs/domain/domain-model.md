@@ -131,9 +131,12 @@ Opportunity, order, payment, and shipment lifecycles remain separate. For
 example, a cash-on-delivery order may be confirmed and shipped while payment is
 still `collect_on_delivery`.
 
-The CRM stores concise Shopify order references and snapshots for relationships
-and reporting. Shopify remains authoritative, and the CRM stores an Admin URL so
-the operator can open full order details there.
+Orders have an explicit sales channel. Native WhatsApp orders belong to the CRM
+and have no Shopify ID, checkout, or Admin URL. They retain agreed line items,
+recipient/address snapshots, payment method, payment evidence, and delivery state.
+Operators record auditable changes; delivery alone never marks payment received.
+Shopify-channel orders remain projections of Shopify records and open in Shopify
+Admin. Attribution and customer purchase reporting include both channels.
 
 ## Activity timeline
 
